@@ -1,0 +1,60 @@
+header {
+  padding: 1vh;
+  width: 100%;
+  background: linear-gradient(to bottom right, #09203f, #537895);
+}
+
+.proceso {
+  display: flex;
+  justify-content: space-around;
+  margin: 5vh auto 6vh auto;
+}
+.proceso div button {
+  background: linear-gradient(to bottom right, #cfd9df, #e2ebf0);
+  border-radius: 10vh;
+  border: none;
+  font-size: 20pt;
+  width: 10vh;
+}
+.proceso div .activa {
+  background: linear-gradient(to bottom right, #09203f, #537895);
+}
+.proceso div p {
+  font-weight: 300;
+  text-align: center;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+}
+.contenedor .titulos {
+  border-bottom: 1px solid grey;
+}
+.contenedor h6 {
+  font-weight: 400;
+}
+.contenedor .list-group button {
+  background: linear-gradient(to bottom right, #cfd9df, #e2ebf0);
+  border-radius: 10vh;
+  border: none;
+  width: 80%;
+  font-size: 12pt;
+}
+.contenedor .list-group button:hover {
+  background: linear-gradient(to bottom right, #09203f, #537895);
+  transition: all 0.5s;
+}
+.contenedor .list-group button:hover:hover {
+  transform: scale(1.08);
+}
+
+.copy {
+  background: linear-gradient(to bottom right, #09203f, #537895);
+  padding: 1vh;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}/*# sourceMappingURL=styles.css.map */
