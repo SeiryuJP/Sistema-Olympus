@@ -7,6 +7,10 @@ module.exports = {
     output: {
         clean: true
     },
+    devServer: {
+        hot: true,
+        open: true
+    },
     module: {
         rules: [
             {
@@ -39,12 +43,15 @@ module.exports = {
             }
         ]
     },
-    optimization: {},
+    target: 'web',
     plugins: [
         new HtmlWebPackPlugin({
-            title: 'Mi Webpack App',
-            //filename: 'index.html',
+            filename: 'index.html',
             template: './src/index.html'
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'prueba.html',
+            template: './src/html/prueba.html'
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
@@ -55,5 +62,5 @@ module.exports = {
                 {from: 'src/assets/', to: 'assets/'}
             ]
         })
-    ]
+    ],
 };
