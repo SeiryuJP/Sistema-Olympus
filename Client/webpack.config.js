@@ -1,15 +1,22 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const filesHTML = ['index.html', 'html/prueba.html'];
 
 module.exports = {
     mode: 'development',
+    devServer: {
+        historyApiFallback: true,
+        allowedHosts: 'all',
+        static: {
+            directory: path.join(__dirname, '/')
+        },
+        hot: true,
+        open:true
+    },
     output: {
         clean: true
-    },
-    devServer: {
-        hot: true,
-        open: true
     },
     module: {
         rules: [
@@ -43,24 +50,20 @@ module.exports = {
             }
         ]
     },
-    target: 'web',
+    optimization: {},
     plugins: [
-        new HtmlWebPackPlugin({
-            filename: 'index.html',
-            template: './src/index.html'
-        }),
-        new HtmlWebPackPlugin({
-            filename: 'prueba.html',
-            template: './src/html/prueba.html'
-        }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
             ignoreOrder: false
         }),
         new CopyPlugin({
             patterns: [
-                {from: 'src/assets/', to: 'assets/'}
+                {from: 'src/assets/', to: 'assets/'},
+                {from: 'src/html/*', to: 'html/[name].[ext]'}
             ]
         })
-    ],
+    ].concat(filesHTML.map((templateFileName) => new HtmlWebPackPlugin({
+        filename: templateFileName,
+        template: './src/'+templateFileName
+    })))
 };
