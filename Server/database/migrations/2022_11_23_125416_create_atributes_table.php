@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('datos_humano', function (Blueprint $table) {
-            $table->id();
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('destino');
-            $table->unsignedBigInteger('proteccion');
-            $table->foreign('proteccion')->references('id')->on('users')->onDelete('cascade');
+        Schema::create('atributes', function (Blueprint $table) {
+            $table->id('ID');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('datos_humano');
+        Schema::dropIfExists('atributes');
     }
 };
