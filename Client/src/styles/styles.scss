@@ -10,7 +10,7 @@ header{
 .proceso{
     display: flex;
     justify-content: space-around;
-    margin: 5vh auto 6vh auto;
+    margin: 4vh auto 5vh auto;
 
     div{
         button{
@@ -30,7 +30,7 @@ header{
     }    
 }
 
-.contenedor{
+.contenedor, .contenedor-prueba{
     display: flex;
     justify-content: center;
     .titulos{
@@ -40,6 +40,10 @@ header{
         font-weight: 400;
     }
     .list-group{
+        p{
+            font-weight: 500;
+            font-size: 14pt;
+        }
         button{
             background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
             border-radius: 10vh;
@@ -47,10 +51,25 @@ header{
             width: 80%;
             font-size: 12pt;
         }
+        .confirmar{
+            text-align: center;
+            button{
+                width: 30%;
+            }
+        }
         button:hover{
             background: linear-gradient(to bottom right,  #09203f, #537895);
             transition: all 0.5s;
             @include zoom();
+        }
+        span{
+            font-size: 10pt;
+            font-weight: 300;
+            color: rgb(226, 59, 59);
+            display: block;
+        }
+        select{
+            width: 27vh;
         }
     }
 }
@@ -60,7 +79,5 @@ header{
     padding: 1vh;
     color: #fff;
     text-align: center;
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
