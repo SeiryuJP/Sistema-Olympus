@@ -55,11 +55,11 @@ const crearPruebaEleccion = () => {
                 <label class="me-4">Habilidad : 
                     <select name="habilidad" class="form-select habilidad mt-2 mb-2" required>
                     <option></option>
-                    <option value="1">Sabiduría</option>
-                    <option value="2">Nobleza</option>
-                    <option value="3">Virtud</option>
-                    <option value="4">Maldad</option>
-                    <option value="5">Audacia</option>
+                    <option value="sabiduria">Sabiduría</option>
+                    <option value="nobleza">Nobleza</option>
+                    <option value="virtud">Virtud</option>
+                    <option value="maldad">Maldad</option>
+                    <option value="audacia">Audacia</option>
                     </select>
                 </label>
                 <label>Valor : 

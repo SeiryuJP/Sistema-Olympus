@@ -1,4 +1,4 @@
-
+import {crearPruebaEleccion} from './crud_pruebas'
 
 export const validacion = () => {
     const pregunta = document.querySelector('.pregunta');
@@ -22,7 +22,7 @@ export const validacion = () => {
         } else {
             const data = new FormData(document.getElementById('formulario'));
             const prueba = Object.fromEntries(data);
-            //crearPruebaEleccion(prueba);
+            crearPruebaEleccion(prueba);
             event.preventDefault();
         }
     });
