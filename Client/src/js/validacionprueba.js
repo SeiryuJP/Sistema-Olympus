@@ -1,6 +1,7 @@
 import {crearPruebaEleccion} from './crud_pruebas'
 import {crearPruebaValoracion} from './crud_pruebas'
 import {crearPruebaPuntual} from './crud_pruebas'
+import {crearPruebaRespuestaLibre} from './crud_pruebas'
 
 export const validacion = () => {
     const pregunta = document.querySelector('.pregunta');
@@ -41,9 +42,7 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                console.log(data);
-                console.log(prueba);
-                //crearPruebaRespuestaLibre(prueba);
+                crearPruebaRespuestaLibre(prueba);
                 event.preventDefault();
             }
         }

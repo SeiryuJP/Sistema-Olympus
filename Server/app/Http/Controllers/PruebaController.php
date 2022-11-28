@@ -7,6 +7,7 @@ use App\Models\Prueba;
 use App\Models\Eleccion;
 use App\Models\Valoracion;
 use App\Models\Puntual;
+use App\Models\RespLibre;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -133,7 +134,7 @@ class PruebaController extends Controller
             $validator = Validator::make($input, [
                 'descripcion' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
-                'porcentaje' => 'required|string|max:100',
+                'porcentaje' => 'required|int|max:100',
             ],$messages);
 
             if($validator->fails()){
@@ -150,6 +151,44 @@ class PruebaController extends Controller
             $puntual = Puntual::create($datos);
             if ($puntual){
                 return response()->json(["success"=>true,"data"=>$puntual, "message" => "Created"]);
+            }
+            else {
+                Prueba::destroy($prueba->id);
+            }
+        }
+        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+
+    }
+
+    public function insertPruebaRespLibre(Request $req){
+
+        $input = $req->all();
+
+        if($prueba = PruebaController::insertPrueba($req)){
+            $messages = [
+                'max' => 'excede del tamaño máximo :max',
+            ];
+
+            $validator = Validator::make($input, [
+                'pregunta' => 'required|string|max:255',
+                'palabrasclaves' => 'required|string|max:255',
+                'porcentaje' => 'required|int|max:100',
+            ],$messages);
+
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+
+            $datos = [
+                'idprueba' => $prueba->id,
+                'pregunta' => $req->pregunta,
+                'palabrasclaves' => $req->palabrasclaves,
+                'porcentaje' => $req->porcentaje,
+            ];
+
+            $libre = RespLibre::create($datos);
+            if ($libre){
+                return response()->json(["success"=>true,"data"=>$libre, "message" => "Created"]);
             }
             else {
                 Prueba::destroy($prueba->id);

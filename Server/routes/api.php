@@ -28,4 +28,6 @@ Route::prefix('prueba')->group(function () {
 
     Route::post('puntual/crear', [PruebaController::class,'insertPruebaPuntual']);
 
+    Route::post('resplibre/crear', [PruebaController::class,'insertPruebaRespLibre']);
+
 });
