@@ -7,6 +7,10 @@ export const validacion = () => {
     const form = document.getElementsByTagName('form')[0];
     const destino = document.querySelector('.destino');
     const habilidad = document.querySelector('.habilidad');
+    const porcentaje = document.querySelector('.porcentaje');
+    const descripcion = document.querySelector('.descripcion');
+    const descripcionError = document.querySelector('.errordescripcion');
+    const porcentajeError = document.querySelector('.errorporcentaje');
     const preguntaError = document.querySelector('.errorpregunta');
     const respuestaError = document.querySelector('.errorespuesta');
     const destinoError = document.querySelector('.errordestino');
@@ -17,12 +21,27 @@ export const validacion = () => {
             let clase = form.classList;
             if(clase.contains('valoracion')){
                 validarValoracion(event);
-                event.preventDefault(); 
             }else if(clase.contains('eleccion')){
                 validarEleccion(event);
+            }else if(clase.contains('puntual')){
+                validarPuntual(event);
             }
             event.preventDefault(); 
         });
+
+        const validarPuntual = (event) => {
+            if(!descripcion.validity.valid || !destino.validity.valid || !habilidad.validity.valid || !porcentaje.validity.valid){
+                mostrarError();
+               event.preventDefault(); 
+            } else {
+                const data = new FormData(document.getElementById('formulario'));
+                const prueba = Object.fromEntries(data);
+                console.log(prueba);
+                console.log(data);
+                //crearPruebaPuntual(prueba);
+                event.preventDefault();
+            }
+        }
 
         const validarValoracion = (event) => {
             if(!pregunta.validity.valid || !destino.validity.valid || !habilidad.validity.valid){
@@ -49,8 +68,10 @@ export const validacion = () => {
         }
 
     const mostrarError = () => {
-        if(pregunta.validity.valueMissing) {
-            preguntaError.textContent = 'Debe introduccir una pregunta';
+        if (form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+            if(pregunta.validity.valueMissing) {
+                preguntaError.textContent = 'Debe introduccir una pregunta';
+            }
         }
         if(destino.validity.valueMissing || destino.validity.rangeOverflow || destino.validity.rangeUnderflow){
             destinoError.textContent = 'Debe introducir dígitos entre 0 y 100';
@@ -63,16 +84,30 @@ export const validacion = () => {
                 respuestaError.textContent = 'Debe introduccir dos respuestas';
             }
         }
+        if(form.classList.contains('puntual')){
+            if(descripcion.validity.valueMissing) {
+                descripcionError.textContent = 'Debe introduccir una descripción';
+            }
+            if(porcentaje.validity.valueMissing || porcentaje.validity.rangeOverflow || porcentaje.validity.rangeUnderflow){
+                porcentajeError.textContent = 'Introduzca un porcentaje entre 0 y 100';
+            }
+        }
     }
         
     
 
     const limpiarError = () => {
-        preguntaError.textContent = '';
+        if (form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+            preguntaError.textContent = '';
+        }
         destinoError.textContent = '';
         habilidadError.textContent = '';
         if (form.classList.contains('eleccion')){
             respuestaError.textContent = '';
+        }
+        if(form.classList.contains('puntual')){
+            descripcionError.textContent = '';
+            porcentajeError.textContent = '';
         }
     }
 }
