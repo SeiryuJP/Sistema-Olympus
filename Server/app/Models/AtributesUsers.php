@@ -10,6 +10,8 @@ class AtributesUsers extends Model
     use HasFactory;
 
     protected $fillable = [
+        'atributeID',
+        'userID',
         'value',
     ];
 }

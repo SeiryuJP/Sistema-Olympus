@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\HumanData;
+use App\Models\AtributesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\VerificationMail;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
     public function register(Request $request){
         $messages = [
             'email' => 'El campo no se ajusta a un correo estándar',
@@ -33,8 +35,26 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token']  = $user->createToken('nuevo', ["read","create"])->plainTextToken;
+        $success['token']  = $user->createToken('token'.$user['id'], ["read","create"])->plainTextToken;
         $success['name'] =  $user->name;
+        VerificationMail::sendMail($user->email);
+        $dataH = [
+            'ID' => $user->id,
+            'fate' => 0,
+            'protection' => rand(1, 3)
+        ];
+        $humanData = HumanData::create($dataH);
+        $cont = 1;
+        while ($cont <= 5) {
+            $dataA = [
+                'atributeID' => $cont,
+                'userID' => $user->id,
+                'value' => rand(1, 5)
+            ];
+            $atributesData = AtributesUsers::create($dataA);
+            $cont++;
+        }
+        redirect('api');
         return response()->json(["success"=>true,"data"=>$success, "message" => "User successfully registered!"],200);
     }
 }

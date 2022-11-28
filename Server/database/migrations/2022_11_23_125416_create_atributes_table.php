@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('atributes', function (Blueprint $table) {
             $table->id('ID');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

@@ -10,6 +10,8 @@ class HumanData extends Model
     use HasFactory;
 
     protected $fillable = [
+        'ID',
         'fate',
+        'protection',
     ];
 }
