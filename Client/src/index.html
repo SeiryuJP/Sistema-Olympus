@@ -6,10 +6,41 @@
     <title>Bootstrap w/ Webpack</title>
   </head>
   <body>
-    <div class="container py-4 px-3 mx-auto">
-      <h1>Hello, Bootstrap and Webpack!</h1>
-      <button class="btn btn-secondary">Primary button</button>
-      <a href="./html/prueba.html">Prueba</a>
+    <nav class="navbar cabecera">
+      <h1><a class="nav-link" href="#">Sistema Olympus</a></h1>
+    </nav>
+    <div class="vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-4  shadow-sm border rounded-3">
+          <div class="p-5 border rounded-3 contenedor">
+            <h2 class="text-center mb-4">SIGN UP</h2>
+          </div>
+          <form class="p-5">
+            <div class="mb-4">
+              <label class="form-label">Name</label>
+              <input type="form-label" class="form-control area-texto email" required
+              pattern="^[a-zA-Z]*{0,20}$">
+          </div>
+            <div class="mb-4">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control area-texto email" required
+                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$">
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control area-texto password" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" class="form-control area-texto confirm-password" required>
+          </div>
+            <div class="mb-4 d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary btn-signUp" type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
     </div>
+    <footer>
+      Miriam & Khattari ©
+    </footer>
   </body>
 </html>

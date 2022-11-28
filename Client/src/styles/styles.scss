@@ -1,1 +1,35 @@
 @import "~bootstrap/scss/bootstrap";
+
+.btn-signUp{
+    border-radius: 4vh;
+    border: 0;
+    margin-top: 2vh;
+    text-align: center; 
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+}
+
+.cabecera{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+}
+
+.navbar{
+    justify-content: center;
+}
+
+footer{
+    text-align: center;
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+}
+
+.contenedor{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+    .signUp{
+        background-color: #fff;
+        .area-texto{
+            background: rgba(255, 255, 255, 0.703);
+        }
+    }
+}
