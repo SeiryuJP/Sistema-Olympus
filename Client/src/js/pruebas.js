@@ -29,6 +29,11 @@ const elegirPrueba = () => {;
         divPrueba.innerHTML = '';
         crearPruebaPuntual();
     });
+    libre.addEventListener('click', () =>{
+        crear.className += " activa";
+        divPrueba.innerHTML = '';
+        crearPruebaRespuestaLibre();
+    });
     seleccion.addEventListener('click', () =>{
         crear.classList.remove("activa");
         divPrueba.innerHTML = '';
@@ -94,7 +99,7 @@ const crearPruebaEleccion = () => {
 
 const crearPruebaPuntual = () =>{
 
-    const htmlValoracion = `
+    const htmlPuntual = `
     <div>
         <div class="titulos mb-4">
           <h1 class="mb-3">Puntual</h1>
@@ -140,7 +145,7 @@ const crearPruebaPuntual = () =>{
     `;
 
     const div = document.createElement('div'); 
-    div.innerHTML = htmlValoracion;
+    div.innerHTML = htmlPuntual;
     divPrueba.append(div.lastElementChild);
     validacion();    
 }
@@ -189,6 +194,53 @@ const crearPruebaValoracion = () =>{
 
     const div = document.createElement('div'); 
     div.innerHTML = htmlValoracion;
+    divPrueba.append(div.lastElementChild);
+    validacion();    
+}
+
+const crearPruebaRespuestaLibre = () =>{
+
+    const htmlLibre = `
+    <div>
+        <div class="titulos mb-4">
+          <h1 class="mb-3">Respuesta Libre</h1>
+          <h6 class="mb-4">Rellena los campos para crear esta prueba</h6>
+        </div>
+        <form class="list-group libre" id="formulario" novalidate>
+            <p class="mb-3">Preguntas</p>
+            <div class="preguntas mb-2">
+                <div class="form-check">
+                    <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Cómo murió Heracles?" required>
+                    <span class="errorpregunta"></span>
+                </div>
+            </div>
+            <p class="mb-3">Palabras clave</p>
+            <div class="preguntas mb-2">
+                <div class="form-check">
+                    <label>Escribe palabras claves, separadas por #</label>
+                    <textarea class="form-control mb-3 mt-2 palabrasclaves" name="palabrasclaves" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                    <span class="errorpalabrasclaves"></span>
+                </div>
+            </div>
+            <p class="mb-3">Porcentaje de dificultad</p>
+            <div class="form-check mb-3">
+                <input name = "porcentaje" class="form-control porcentaje mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
+                <span class="errorporcentaje"></span>
+            </div>
+            <p class="mb-3">Cantidad de Destino</p>
+            <div class="form-check mb-3">
+                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
+                <span class="errordestino"></span>
+            </div>
+            <div class="confirmar mb-5">
+                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
+            </div>
+        </form>
+    </div>
+    `;
+
+    const div = document.createElement('div'); 
+    div.innerHTML = htmlLibre;
     divPrueba.append(div.lastElementChild);
     validacion();    
 }

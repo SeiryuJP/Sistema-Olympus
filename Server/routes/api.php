@@ -26,4 +26,6 @@ Route::prefix('prueba')->group(function () {
 
     Route::post('valoracion/crear', [PruebaController::class,'insertPruebaValoracion']);
 
+    Route::post('puntual/crear', [PruebaController::class,'insertPruebaPuntual']);
+
 });

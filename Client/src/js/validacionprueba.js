@@ -1,5 +1,6 @@
 import {crearPruebaEleccion} from './crud_pruebas'
 import {crearPruebaValoracion} from './crud_pruebas'
+import {crearPruebaPuntual} from './crud_pruebas'
 
 export const validacion = () => {
     const pregunta = document.querySelector('.pregunta');
@@ -9,6 +10,8 @@ export const validacion = () => {
     const habilidad = document.querySelector('.habilidad');
     const porcentaje = document.querySelector('.porcentaje');
     const descripcion = document.querySelector('.descripcion');
+    const palabrasclaves = document.querySelector('.palabrasclaves');
+    const palabrasclavesError = document.querySelector('.errorpalabrasclaves');
     const descripcionError = document.querySelector('.errordescripcion');
     const porcentajeError = document.querySelector('.errorporcentaje');
     const preguntaError = document.querySelector('.errorpregunta');
@@ -25,9 +28,25 @@ export const validacion = () => {
                 validarEleccion(event);
             }else if(clase.contains('puntual')){
                 validarPuntual(event);
+            }else if(clase.contains('libre')){
+                validarRespuestaLibre(event);
             }
             event.preventDefault(); 
         });
+
+        const validarRespuestaLibre = (event) => {
+            if(!pregunta.validity.valid || !destino.validity.valid || !palabrasclaves.validity.valid || !porcentaje.validity.valid){
+                mostrarError();
+               event.preventDefault(); 
+            } else {
+                const data = new FormData(document.getElementById('formulario'));
+                const prueba = Object.fromEntries(data);
+                console.log(data);
+                console.log(prueba);
+                //crearPruebaRespuestaLibre(prueba);
+                event.preventDefault();
+            }
+        }
 
         const validarPuntual = (event) => {
             if(!descripcion.validity.valid || !destino.validity.valid || !habilidad.validity.valid || !porcentaje.validity.valid){
@@ -36,9 +55,7 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                console.log(prueba);
-                console.log(data);
-                //crearPruebaPuntual(prueba);
+                crearPruebaPuntual(prueba);
                 event.preventDefault();
             }
         }
@@ -68,7 +85,7 @@ export const validacion = () => {
         }
 
     const mostrarError = () => {
-        if (form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+        if (form.classList.contains('eleccion') || form.classList.contains('valoracion') || form.classList.contains('libre')){
             if(pregunta.validity.valueMissing) {
                 preguntaError.textContent = 'Debe introduccir una pregunta';
             }
@@ -76,17 +93,26 @@ export const validacion = () => {
         if(destino.validity.valueMissing || destino.validity.rangeOverflow || destino.validity.rangeUnderflow){
             destinoError.textContent = 'Debe introducir dígitos entre 0 y 100';
         }
-        if(habilidad.validity.valueMissing){
-            habilidadError.textContent = 'Selecciona una habilidad';
+        if(form.classList.contains('puntual') || form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+            if(habilidad.validity.valueMissing){
+                habilidadError.textContent = 'Selecciona una habilidad';
+            }
         }
         if (form.classList.contains('eleccion')){
             if(respuesta.validity.valueMissing){
                 respuestaError.textContent = 'Debe introduccir dos respuestas';
             }
         }
-        if(form.classList.contains('puntual')){
-            if(descripcion.validity.valueMissing) {
-                descripcionError.textContent = 'Debe introduccir una descripción';
+        if(form.classList.contains('libre')){
+            if(palabrasclaves.validity.valueMissing) {
+                palabrasclavesError.textContent = 'Debe introduccir palabras claves';
+            }
+        }
+        if(form.classList.contains('puntual') || form.classList.contains('libre')){
+            if(form.classList.contains('puntual')){
+                if(descripcion.validity.valueMissing) {
+                    descripcionError.textContent = 'Debe introduccir una descripción';
+                }
             }
             if(porcentaje.validity.valueMissing || porcentaje.validity.rangeOverflow || porcentaje.validity.rangeUnderflow){
                 porcentajeError.textContent = 'Introduzca un porcentaje entre 0 y 100';
@@ -97,16 +123,23 @@ export const validacion = () => {
     
 
     const limpiarError = () => {
-        if (form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+        if (form.classList.contains('eleccion') || form.classList.contains('valoracion') || form.classList.contains('libre')){
             preguntaError.textContent = '';
         }
         destinoError.textContent = '';
-        habilidadError.textContent = '';
+        if(form.classList.contains('puntual') || form.classList.contains('eleccion') || form.classList.contains('valoracion')){
+            habilidadError.textContent = '';
+        }
         if (form.classList.contains('eleccion')){
             respuestaError.textContent = '';
         }
-        if(form.classList.contains('puntual')){
-            descripcionError.textContent = '';
+        if(form.classList.contains('libre')){
+            palabrasclavesError.textContent = '';
+        }
+        if(form.classList.contains('puntual') || form.classList.contains('libre')){
+            if(form.classList.contains('puntual')){
+                descripcionError.textContent = '';   
+            }
             porcentajeError.textContent = '';
         }
     }
