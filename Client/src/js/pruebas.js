@@ -19,6 +19,11 @@ const elegirPrueba = () => {;
         divPrueba.innerHTML = '';
         crearPruebaEleccion();
     });
+    valoracion.addEventListener('click', () =>{
+        crear.className += " activa";
+        divPrueba.innerHTML = '';
+        crearPruebaValoracion();
+    });
     seleccion.addEventListener('click', () =>{
         crear.classList.remove("activa");
         divPrueba.innerHTML = '';
@@ -27,13 +32,13 @@ const elegirPrueba = () => {;
 }
 
 const crearPruebaEleccion = () => {
-    const htmlPuntual = `
+    const htmlEleccion = `
     <div>
         <div class="titulos mb-4">
           <h1 class="mb-3">Elección</h1>
           <h6 class="mb-4">Escribe una pregunta con dos respuesta, una correcta y otra falsa</h6>
         </div>
-        <form class="list-group" id="formulario" novalidate>
+        <form class="list-group eleccion" id="formulario" novalidate>
             <p class="mb-3">Pregunta</p>
             <div class="form-check mb-3">
                 <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Eres libre en tus elecciones?" required>
@@ -88,9 +93,57 @@ const crearPruebaEleccion = () => {
     `;
 
     const div = document.createElement('div'); 
-    div.innerHTML = htmlPuntual;
+    div.innerHTML = htmlEleccion;
     divPrueba.append(div.lastElementChild);
     validacion();
+}
+
+const crearPruebaValoracion = () =>{
+
+    const htmlValoracion = `
+    <div>
+        <div class="titulos mb-4">
+          <h1 class="mb-3">Valoración</h1>
+          <h6 class="mb-4">Escribe múltiples preguntas y vinculalas a una habilidad</h6>
+        </div>
+        <form class="list-group valoracion" id="formulario" novalidate>
+            <p class="mb-3">Preguntas</p>
+            <div class="preguntas mb-2">
+                <div class="form-check">
+                    <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Eres libre en tus elecciones?" required>
+                    <span class="errorpregunta"></span>
+                </div>
+            </div>
+            <p class="mb-3">Atributo</p>
+            <div class="form-check mb-3">
+                <label class="me-4">Habilidad : 
+                    <select name="habilidad" class="form-select habilidad mt-2 mb-2" required>
+                    <option></option>
+                    <option value="sabiduria">Sabiduría</option>
+                    <option value="nobleza">Nobleza</option>
+                    <option value="virtud">Virtud</option>
+                    <option value="maldad">Maldad</option>
+                    <option value="audacia">Audacia</option>
+                    </select>
+                </label>
+                <span class="errorhabilidad mb-2"></span>
+            </div>
+            <p class="mb-3">Cantidad de Destino</p>
+            <div class="form-check mb-3">
+                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
+                <span class="errordestino"></span>
+            </div>
+            <div class="confirmar mb-5">
+                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
+            </div>
+        </form>
+    </div>
+    `;
+
+    const div = document.createElement('div'); 
+    div.innerHTML = htmlValoracion;
+    divPrueba.append(div.lastElementChild);
+    validacion();    
 }
 
 const crearSeleccionPrueba = () => {

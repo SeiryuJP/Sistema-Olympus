@@ -1,8 +1,9 @@
-const urlCRUD = 'http://127.0.0.1:8000/api/prueba/eleccion/crear';
+const urlCrearEleccion = 'http://127.0.0.1:8000/api/prueba/eleccion/crear';
+const urlCrearValoracion = 'http://127.0.0.1:8000/api/prueba/valoracion/crear';
 
 
 const crearPruebaEleccion = async(prueba) => {
-    const resp = await fetch(urlCRUD, {
+    const resp = await fetch(urlCrearEleccion, {
         method: 'POST',
         body: JSON.stringify(prueba),
         headers: {
@@ -12,6 +13,18 @@ const crearPruebaEleccion = async(prueba) => {
     return await resp.json();
 }
 
+const crearPruebaValoracion = async(prueba) => {
+    const resp = await fetch(urlCrearValoracion, {
+        method: 'POST',
+        body: JSON.stringify(prueba),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    });
+    return await resp.json();
+}
+
 export {
-    crearPruebaEleccion
+    crearPruebaEleccion,
+    crearPruebaValoracion
 }
