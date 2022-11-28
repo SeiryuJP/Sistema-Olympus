@@ -61,13 +61,11 @@ module.exports = {
         ]
     },
     plugins: [
+       
         new HtmlWebPackPlugin({
-            filename: 'index.html',
+            title: 'Mi Webpack App',
+            //filename: 'index.html',
             template: './src/index.html'
-        }),
-        new HtmlWebPackPlugin({
-            filename: 'prueba.html',
-            template: './src/html/prueba.html'
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[fullhash].css',
@@ -75,8 +73,10 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                {from: 'src/assets/', to: 'assets/'}
+                {from: 'src/assets/', to: 'assets/'},
+                {from: 'src/html/*', to: 'html/[name][ext]'}
             ]
         })
+        
     ]
 };
