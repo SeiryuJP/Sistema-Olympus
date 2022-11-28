@@ -67,18 +67,7 @@ const crearPruebaEleccion = () => {
                     <option value="audacia">Audacia</option>
                     </select>
                 </label>
-                <label>Valor : 
-                    <select name="valor" class="form-select valor mt-2 mb-2" required>
-                        <option></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </label>
                 <span class="errorhabilidad mb-2"></span>
-                <span class="errorvalor"></span>
             </div>
             <p class="mb-3">Cantidad de Destino</p>
             <div class="form-check mb-3">

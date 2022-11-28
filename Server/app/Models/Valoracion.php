@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Eleccion extends Model
+class Valoracion extends Model
 {
     use HasFactory;
 
-    protected $table = 'eleccion';
+    protected $table = 'valoracion';
     protected $primaryKey = 'idprueba';
     public $incrementing = false;
     protected $keyType = 'bigint';
@@ -18,8 +18,6 @@ class Eleccion extends Model
     protected $fillable = [
         'idprueba',
         'pregunta',
-        'correcta',
-        'incorrecta',
         'habilidad',
     ];
 

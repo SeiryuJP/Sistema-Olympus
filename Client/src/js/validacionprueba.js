@@ -7,20 +7,15 @@ export const validacion = () => {
     const form = document.getElementsByTagName('form')[0];
     const destino = document.querySelector('.destino');
     const habilidad = document.querySelector('.habilidad');
-    const valor = document.querySelector('.valor');
     const preguntaError = document.querySelector('.errorpregunta');
     const respuestaError = document.querySelector('.errorespuesta');
     const destinoError = document.querySelector('.errordestino');
     const habilidadError = document.querySelector('.errorhabilidad');
-    const valorError = document.querySelector('.errorvalor');
 
         form.addEventListener('submit', (event) => {
             limpiarError(); //Reinicia el valor de los errores
             let clase = form.classList;
-            console.log(clase.contains('valoracion'));
-            console.log(clase.contains('eleccion'));
             if(clase.contains('valoracion')){
-                console.log(clase.contains('valoracion'));
                 validarValoracion(event);
                 event.preventDefault(); 
             }else if(clase.contains('eleccion')){
@@ -30,22 +25,19 @@ export const validacion = () => {
         });
 
         const validarValoracion = (event) => {
-            console.log(pregunta);
             if(!pregunta.validity.valid || !destino.validity.valid || !habilidad.validity.valid){
                 mostrarError();
                event.preventDefault(); 
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                console.log(prueba);
-                console.log(data);
                 crearPruebaValoracion(prueba);
                 event.preventDefault();
             }
         }
 
         const validarEleccion = (event) => {
-            if(!pregunta.validity.valid || !respuesta.validity.valid || !destino.validity.valid || !habilidad.validity.valid || !valor.validity.valid){
+            if(!pregunta.validity.valid || !respuesta.validity.valid || !destino.validity.valid || !habilidad.validity.valid){
                 mostrarError();
                 event.preventDefault(); 
             } else {
@@ -70,9 +62,6 @@ export const validacion = () => {
             if(respuesta.validity.valueMissing){
                 respuestaError.textContent = 'Debe introduccir dos respuestas';
             }
-            if(valor.validity.valueMissing){
-                valorError.textContent = 'Selecciona un valor de habilidad';
-            }
         }
     }
         
@@ -84,7 +73,6 @@ export const validacion = () => {
         habilidadError.textContent = '';
         if (form.classList.contains('eleccion')){
             respuestaError.textContent = '';
-            valorError.textContent = '';
         }
     }
 }

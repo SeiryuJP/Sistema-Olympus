@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('eleccion', function (Blueprint $table) {
+        Schema::create('valoracion', function (Blueprint $table) {
             $table->unsignedBigInteger('idprueba');
             $table->foreign('idprueba')->references('id')->on('prueba')->onDelete('cascade');
             $table->string('pregunta');
-            $table->string('correcta');
-            $table->string('incorrecta');
             $table->string('habilidad');
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eleccion');
+        Schema::dropIfExists('valoracion');
     }
 };

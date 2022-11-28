@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prueba;
 use App\Models\Eleccion;
+use App\Models\Valoracion;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -48,7 +49,6 @@ class PruebaController extends Controller
         $input = $req->all();
 
         if($prueba = PruebaController::insertPrueba($req)){
-            print_r($prueba->id);
             $messages = [
                 'max' => 'excede del tamaño máximo :max',
             ];
@@ -58,7 +58,6 @@ class PruebaController extends Controller
                 'correcta' => 'required|string|max:255',
                 'incorrecta' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
-                'valor' => 'required|int|max:5',
             ],$messages);
 
             if($validator->fails()){
@@ -71,10 +70,46 @@ class PruebaController extends Controller
                 'correcta' => $req->correcta,
                 'incorrecta' => $req->incorrecta,
                 'habilidad' => $req->habilidad,
-                'valor' => $req->valor,
             ];
 
             $eleccion = Eleccion::create($datos);
+            if ($eleccion){
+                return response()->json(["success"=>true,"data"=>$eleccion, "message" => "Created"]);
+            }
+            else {
+                Prueba::destroy($prueba->id);
+            }
+        }
+        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+
+    }
+
+    public function insertPruebaValoracion(Request $req){
+
+        $input = $req->all();
+
+        if($prueba = PruebaController::insertPrueba($req)){
+            print_r($prueba->id);
+            $messages = [
+                'max' => 'excede del tamaño máximo :max',
+            ];
+
+            $validator = Validator::make($input, [
+                'pregunta' => 'required|string|max:255',
+                'habilidad' => 'required|string|max:255',
+            ],$messages);
+
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+
+            $datos = [
+                'idprueba' => $prueba->id,
+                'pregunta' => $req->pregunta,
+                'habilidad' => $req->habilidad,
+            ];
+
+            $eleccion = Valoracion::create($datos);
             if ($eleccion){
                 return response()->json(["success"=>true,"data"=>$eleccion, "message" => "Created"]);
             }
