@@ -1,10 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
-@import "animation";
+@import "animation"; 
 
 header{
     padding: 1vh;
     width: 100%;
-    background: linear-gradient(to bottom right,  #09203f, #537895);
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
 }
 
 .proceso{
@@ -14,14 +14,14 @@ header{
 
     div{
         button{
-            background: linear-gradient(to bottom right, #cfd9df, #e2ebf0);
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
             border-radius: 10vh;
             border: none;
             font-size: 20pt; 
             width: 10vh; 
         }
         .activa{
-            background: linear-gradient(to bottom right,  #09203f, #537895);
+            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
         }
         p{
             font-weight: 300;
@@ -59,7 +59,7 @@ header{
             }
         }
         button:hover{
-            background: linear-gradient(to bottom right,  #09203f, #537895);
+            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
             transition: all 0.5s;
             @include zoom();
         }
@@ -75,10 +75,42 @@ header{
     }
 }
 
-.copy{
-    background: linear-gradient(to bottom right,  #09203f, #537895);
-    padding: 1vh;
+
+
+
+
+/**************************ESTILO LOGIN Y REGISTRO**************************************/
+.btn-signUp{
+    border-radius: 4vh;
+    border: 0;
+    margin-top: 2vh;
+    text-align: center; 
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+}
+
+.cabecera{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
     color: #fff;
+}
+
+.navbar{
+    justify-content: center;
+}
+
+footer{
+    padding: 1vh;
     text-align: center;
-    width: 100%;
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+}
+
+.contenedorRegistro{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+    .signUp{
+        background-color: #fff;
+        .area-texto{
+            background: rgba(255, 255, 255, 0.703);
+        }
+    }
 }
