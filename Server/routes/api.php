@@ -30,4 +30,6 @@ Route::prefix('prueba')->group(function () {
 
     Route::post('resplibre/crear', [PruebaController::class,'insertPruebaRespLibre']);
 
+    Route::get('listar', [PruebaController::class,'getPruebas']);
+
 });

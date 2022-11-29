@@ -197,4 +197,12 @@ class PruebaController extends Controller
         return response()->json(["success" => false, "message" => "Error al insertar"],202);
 
     }
+
+    public function getPruebas(){
+        {
+            $prueba = Prueba::all();
+
+            return response()->json($prueba,200);
+        }
+    }
 }
