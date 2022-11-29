@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import "animation";
 
 .btn-signUp{
     border-radius: 4vh;
@@ -18,12 +19,13 @@
 }
 
 footer{
+    padding: 1vh;
     text-align: center;
     background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
     color: #fff;
 }
 
-.contenedor{
+.contenedorRegistro{
     background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
     color: #fff;
     .signUp{
@@ -31,5 +33,17 @@ footer{
         .area-texto{
             background: rgba(255, 255, 255, 0.703);
         }
+    }
+    button{
+        background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+        border-radius: 10vh;
+        border: none;
+        width: 80%;
+        font-size: 12pt;
+    }
+    button:hover{
+        background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+        transition: all 0.5s;
+        @include zoom();
     }
 }

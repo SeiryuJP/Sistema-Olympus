@@ -20,4 +20,4 @@ use App\Http\Controllers\VerificationMail;
 //     return $request->user();
 // });
 
-Route::post('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);

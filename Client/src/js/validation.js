@@ -1,14 +1,17 @@
-const formulario = document.getElementsByTagName('form');
+import { registrar } from "./http-provider";
+
+const name = document.querySelector('.name');
 const email = document.querySelector('.email');
-const password = document.querySelector('password');
-const confirm_password = document.querySelector('confirm-password');
+const password = document.querySelector('.password');
+const confirm_password = document.querySelector('.confirm_password');
+const form = document.getElementsByTagName('form')[0];
 
 export const inicializar = () =>{
     validation();
 }
 
 const validation = () => {
-    formulario.addEventListener('submit', (event) => {
+    form.addEventListener('submit', (event) => {
         if(!email.validity.valid || !password.validity.valid){
             if(!email.validity.valid){
                // mostrarErrorEmail();
@@ -18,15 +21,15 @@ const validation = () => {
                 //mostrarErrorPassword();
                 event.preventDefault();
             }
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords Don't Match");
-                event.preventDefault();
-            }
         }else{
-            const dato = new FormData(formulario);
-            const usuario = Object.fromEntries(dato);
-            console.log(usuario);
-            //conseguirUsuario(usuario)
+            const data = new FormData(document.getElementById('registro'));
+            const usuario = Object.fromEntries(data);
+            registrar(usuario).then(console.log);
+            event.preventDefault();
+            name.value = "";
+            email.value = "";
+            password.value = "";
+            confirm_password.value = "";
         }
     });
 }
