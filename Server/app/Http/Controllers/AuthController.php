@@ -57,4 +57,18 @@ class AuthController extends Controller {
         redirect('api');
         return response()->json(["success"=>true,"data"=>$success, "message" => "User successfully registered!"],200);
     }
+
+    public function login(Request $request){
+         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $auth = Auth::user();
+            $success['token'] =  $auth->createToken('token_acceso',["delete","create"])->plainTextToken;
+            $success['name'] =  $auth->name;
+            return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
+        }
+        else{
+            return response()->json(["success"=>false, "message" => "Unauthorised"],202);
+        }
+    }
+
+       
 }
