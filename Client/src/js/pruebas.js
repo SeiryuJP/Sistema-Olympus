@@ -1,12 +1,51 @@
-import {validacion} from './validacionprueba';
+//import {validacion} from './validacionprueba';
+import {obtenerListaPruebas} from './crud_pruebas';
+
+const lista = document.querySelector('.lista');
+
+export const init = async() => {
+    const pruebas = await obtenerListaPruebas();
+    pruebas.forEach( crearFilaPrueba );
+}
+
+const crearFilaPrueba = ( prueba ) => {
+    const fila = (dios) => `
+        <th scope="row">${prueba.id}</th>
+        <td>${dios}</td>
+        <td>${prueba.destino}</td>
+        <td>${prueba.updated_at.slice(0, -8)}</td>
+    `;
+
+    let dios = nombreDios(prueba.iddios);
+    const tr = document.createElement('tr');
+    tr.innerHTML = fila (dios);
+    lista.appendChild(tr);
+}
+
+const nombreDios = (id) => {
+    let dios = '';
+    switch(id){
+        case 1:
+            dios = 'Zeus';
+        break;
+        case 2:
+            dios = 'Poseidon';
+        break;
+        case 3:
+            dios = 'Hades';
+        break;
+    }
+    return dios;
+}
+
+
 
 //const puntual = document.querySelector('.puntual');
 /* const eleccion = document.querySelector('.eleccion');
 const libre = document.querySelector('.libre');
 const valoracion = document.querySelector('.valoracion');
 const seleccion = document.querySelector('.seleccion');
-const divPrueba = document.querySelector('.contenedor'); */
-
+const divPrueba = document.querySelector('.contenedor'); 
 
 export const inicioPrueba = () => {
     elegirPrueba();
@@ -267,3 +306,4 @@ const crearSeleccionPrueba = () => {
     div.innerHTML = htmlPuntual;
     divPrueba.append(div.lastElementChild);
 }
+*/

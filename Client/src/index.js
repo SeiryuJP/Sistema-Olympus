@@ -5,6 +5,10 @@ import './styles/styles.scss'
 import * as bootstrap from 'bootstrap'
 
 import {validacion} from './js/validacionprueba';
+import {init} from './js/pruebas';
 
+
+init();
 validacion();
+
 

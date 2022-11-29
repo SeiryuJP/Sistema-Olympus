@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
-const filesHTML = ['index.html', 'html/pruebas.html', 'html/pruebaeleccion.html', 'html/pruebavaloracion.html', 'html/pruebapuntual.html', 'html/pruebaresplibre.html'];
+const filesHTML = ['index.html', 'html/pruebas.html', 'html/pruebaeleccion.html', 'html/pruebavaloracion.html', 'html/pruebapuntual.html', 'html/pruebaresplibre.html', 'html/historialpruebas.html'];
 
 module.exports = {
     mode: 'development',

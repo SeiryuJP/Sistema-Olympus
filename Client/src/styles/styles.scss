@@ -1,16 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 @import "animation"; 
 
-header{
-    padding: 1vh;
-    width: 100%;
-    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-}
-
 .proceso{
     display: flex;
     justify-content: space-around;
-    margin: 4vh auto 5vh auto;
+    margin: 14vh auto 8vh auto;
 
     div{
         button{
@@ -33,6 +27,7 @@ header{
 .contenedor, .contenedor-prueba{
     display: flex;
     justify-content: center;
+    margin-bottom: 10vh;
     .titulos{
         border-bottom: 1px solid grey;
     }
@@ -74,9 +69,18 @@ header{
         }
     }
 }
-
-
-
+.container {
+    .contenedor-tabla{
+        overflow-y: scroll;
+        max-height: 60vh;
+        margin: 13vh auto;
+        thead{
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            color: white;
+            border-radius: 10vh;
+        }
+    }
+}
 
 
 /**************************ESTILO LOGIN Y REGISTRO**************************************/

@@ -2,7 +2,13 @@ const urlCrearEleccion = 'http://127.0.0.1:8000/api/prueba/eleccion/crear';
 const urlCrearValoracion = 'http://127.0.0.1:8000/api/prueba/valoracion/crear';
 const urlCrearPuntual = 'http://127.0.0.1:8000/api/prueba/puntual/crear';
 const urlCrearRespLibre = 'http://127.0.0.1:8000/api/prueba/resplibre/crear';
+const urlListPruebas = 'http://127.0.0.1:8000/api/prueba/listar';
 
+export const obtenerListaPruebas = async() => {
+    const resp = await fetch(urlListPruebas);
+    const prueba = await resp.json();
+    return prueba;
+}
 
 const crearPruebaEleccion = async(prueba) => {
     const resp = await fetch(urlCrearEleccion, {
