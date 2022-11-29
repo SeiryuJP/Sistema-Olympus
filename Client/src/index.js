@@ -4,7 +4,7 @@ import './styles/styles.scss'
 // Import all of Bootstrap JS
 import * as bootstrap from 'bootstrap'
 
-import {inicioPrueba} from './js/pruebas';
+import {validacion} from './js/validacionprueba';
 
-inicioPrueba();
+validacion();
 

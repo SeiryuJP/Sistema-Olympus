@@ -1,11 +1,11 @@
 import {validacion} from './validacionprueba';
 
-const puntual = document.querySelector('.puntual');
-const eleccion = document.querySelector('.eleccion');
+//const puntual = document.querySelector('.puntual');
+/* const eleccion = document.querySelector('.eleccion');
 const libre = document.querySelector('.libre');
 const valoracion = document.querySelector('.valoracion');
 const seleccion = document.querySelector('.seleccion');
-const divPrueba = document.querySelector('.contenedor');
+const divPrueba = document.querySelector('.contenedor'); */
 
 
 export const inicioPrueba = () => {
