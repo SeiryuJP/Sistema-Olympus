@@ -30,9 +30,16 @@ const filesHTML = [
     {
         filename: './html/historialpruebas.html',
         chunks: ['listadoPruebas']
+    },
+    {
+        filename: './html/registro.html',
+        chunks: ['registro']
+    },
+    {
+        filename: './html/listadoUsuarios.html',
+        chunks: ['listadoUsuarios']
     }
 ]
-    
 
 module.exports = {
     mode: 'development',
@@ -89,6 +96,8 @@ module.exports = {
         pruebasPuntual: './src/js/indexValidacion.js',
         pruebasRespLibre: './src/js/indexValidacion.js',
         listadoPruebas: './src/js/indexListado.js',
+        registro: './src/index.js',
+        listadoUsuarios: './src/js/listadoUsuarios.js'
     },
     plugins: [
         new MiniCssExtractPlugin({

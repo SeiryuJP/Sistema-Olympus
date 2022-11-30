@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VerificationMail;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::prefix('prueba')->group(function () {
 
@@ -33,3 +36,7 @@ Route::prefix('prueba')->group(function () {
     Route::get('listar', [PruebaController::class,'getPruebas']);
 
 });
+
+Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
+Route::post('login', [AuthController::class, 'login'])->middleware(['cors']);
+Route::get('users', [UserController::class, 'allUsers'])->middleware(['cors']);
