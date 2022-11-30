@@ -1,4 +1,3 @@
-//import {validacion} from './validacionprueba';
 import {obtenerListaPruebas} from './crud_pruebas';
 
 const lista = document.querySelector('.lista');
