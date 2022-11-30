@@ -2,8 +2,20 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
-const filesHTML = ['index.html', 'html/registro.html'];
-
+const filesHTML = [
+    {
+        filename: 'index.html',
+        chunks: ['index']
+    },
+    {
+        filename: './html/registro.html',
+        chunks: ['registro']
+    },
+    {
+        filename: './html/listadoUsuarios.html',
+        chunks: ['listadoUsuarios']
+    }
+]
 module.exports = {
     mode: 'development',
     devServer: {
@@ -50,6 +62,11 @@ module.exports = {
             }
         ]
     },
+    entry: {
+        index: './src/index.js',
+        registro: './src/index.js',
+        listadoUsuarios: './src/js/listadoUsuarios.js'
+    },
     optimization: {},
     plugins: [
         new MiniCssExtractPlugin({
@@ -62,8 +79,10 @@ module.exports = {
                 {from: 'src/html/*', to: 'html/[name].[ext]'}
             ]
         })
-    ].concat(filesHTML.map((templateFileName) => new HtmlWebPackPlugin({
-        filename: templateFileName,
-        template: './src/'+templateFileName
+    ].concat(filesHTML.map((templateFile) => new HtmlWebPackPlugin({
+        filename: templateFile.filename,
+        template: './src/'+templateFile.filename,
+        chunks: templateFile.chunks,
+        inject: (templateFile.chunks.length == 0) ? false: true
     })))
 };

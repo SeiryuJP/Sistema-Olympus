@@ -46,3 +46,31 @@ footer{
         }
     }
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+    padding-bottom:160px;
+  }
+  body {
+    margin-bottom: 160px;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+.table { 
+    overflow: auto; 
+    height: 100px; 
+}
+
+.table {
+    thead {
+        th {  
+            position: sticky; 
+            top: 0; z-index: 1; 
+        }
+    } 
+} 
