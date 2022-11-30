@@ -2,7 +2,37 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
-const filesHTML = ['index.html', 'html/prueba.html'];
+const filesHTML = [
+    {
+        filename: 'index.html',
+        chunks: ['index']
+    },
+    {
+        filename: './html/pruebas.html',
+        chunks: ['pruebas']
+    },
+    {
+        filename: './html/pruebaeleccion.html',
+        chunks: ['pruebasEleccion']
+    },
+    {
+        filename: './html/pruebavaloracion.html',
+        chunks: ['pruebasValoracion']
+    },
+    {
+        filename: './html/pruebapuntual.html',
+        chunks: ['pruebasPuntual']
+    },
+    {
+        filename: './html/pruebaresplibre.html',
+        chunks: ['pruebasRespLibre']
+    },
+    {
+        filename: './html/historialpruebas.html',
+        chunks: ['listadoPruebas']
+    }
+]
+    
 
 module.exports = {
     mode: 'development',
@@ -51,6 +81,15 @@ module.exports = {
         ]
     },
     optimization: {},
+    entry: {
+        index: './src/index.js',
+        pruebas: './src/index.js',
+        pruebasValoracion: './src/js/indexValidacion.js',
+        pruebasEleccion: './src/js/indexValidacion.js',
+        pruebasPuntual: './src/js/indexValidacion.js',
+        pruebasRespLibre: './src/js/indexValidacion.js',
+        listadoPruebas: './src/js/indexListado.js',
+    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css',
@@ -62,8 +101,10 @@ module.exports = {
                 {from: 'src/html/*', to: 'html/[name].[ext]'}
             ]
         })
-    ].concat(filesHTML.map((templateFileName) => new HtmlWebPackPlugin({
-        filename: templateFileName,
-        template: './src/'+templateFileName
+    ].concat(filesHTML.map((templateFile) => new HtmlWebPackPlugin({
+        filename: templateFile.filename,
+        template: './src/'+templateFile.filename,
+        chunks: templateFile.chunks,
+        inject: (templateFile.chunks.length == 0) ? false: true
     })))
 };

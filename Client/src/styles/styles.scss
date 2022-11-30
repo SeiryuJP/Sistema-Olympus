@@ -1,1 +1,137 @@
 @import "~bootstrap/scss/bootstrap";
+@import "animation"; 
+
+.proceso{
+    display: flex;
+    justify-content: space-around;
+    margin: 14vh auto 8vh auto;
+
+    div{
+        button{
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            border-radius: 10vh;
+            border: none;
+            font-size: 20pt; 
+            width: 10vh; 
+        }
+        .activa{
+            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+        }
+        p{
+            font-weight: 300;
+            text-align: center;
+        }
+    }    
+}
+
+.contenedor, .contenedor-prueba{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10vh;
+    .titulos{
+        border-bottom: 1px solid grey;
+    }
+    h6{
+        font-weight: 400;
+    }
+    .list-group{
+        width: 58vh;
+        p{
+            font-weight: 500;
+            font-size: 14pt;
+        }
+        button{
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            border-radius: 10vh;
+            border: none;
+            width: 80%;
+            font-size: 12pt;
+        }
+        .confirmar{
+            text-align: center;
+            button{
+                width: 30%;
+            }
+        }
+        button:hover{
+            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+            transition: all 0.5s;
+            @include zoom();
+        }
+        span{
+            font-size: 10pt;
+            font-weight: 300;
+            color: rgb(226, 59, 59);
+            display: block;
+        }
+        select{
+            width: 55vh;
+        }
+    }
+}
+.container {
+    margin-top: 6vh;
+    .contenedor-tabla{
+        overflow-y: scroll;
+        max-height: 60vh;
+        margin: 3vh auto 13vh auto;
+        thead{
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            color: white;
+            border-radius: 10vh;
+        }
+    }
+    button{
+        background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+        border-radius: 10vh;
+        border: none;
+        width: 20%;
+        font-size: 12pt;
+        padding: 1vh;
+        color: white;
+        font-weight: 500;
+    }
+    button:hover{
+        background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+        transition: all 0.5s;
+        @include zoom();
+    }
+
+}
+
+
+/**************************ESTILO LOGIN Y REGISTRO**************************************/
+.btn-signUp{
+    border-radius: 4vh;
+    border: 0;
+    margin-top: 2vh;
+    text-align: center; 
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+}
+
+.cabecera{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+}
+
+.navbar{
+    justify-content: center;
+}
+
+footer{
+    padding: 1vh;
+    text-align: center;
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+}
+
+.contenedorRegistro{
+    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+    color: #fff;
+    .signUp{
+        background-color: #fff;
+        .area-texto{
+            background: rgba(255, 255, 255, 0.703);
+        }
+    }
+}
