@@ -61,14 +61,35 @@ class AuthController extends Controller {
     public function login(Request $request){
          if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $auth = Auth::user();
-            $success['token'] =  $auth->createToken('token_acceso',["delete","create"])->plainTextToken;
-            $success['name'] =  $auth->name;
-            return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
+            $role = $auth->role;
+            switch ($auth->role) {
+                case 'human':
+                    $success['token'] =  $auth->createToken('token'.$auth->id, ["read"])->plainTextToken;
+                    $success['name'] =  $auth->name;
+                    return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
+                    break;
+                
+                case 'god':
+                    $success['token'] =  $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
+                    $success['name'] =  $auth->name;
+                    return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
+                    break;
+            }
         }
         else{
             return response()->json(["success"=>false, "message" => "Unauthorised"],202);
         }
     }
 
-       
+    public function logout(Request $request)
+    {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $cantidad = Auth::user()->tokens()->delete();
+            return response()->json(["success"=>$cantidad, "message" => "Tokens Revoked"],200);
+        }
+        else {
+            return response()->json("Unauthorised",204);
+        }
+
+    }  
 }

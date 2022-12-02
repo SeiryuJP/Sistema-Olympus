@@ -39,4 +39,5 @@ Route::prefix('prueba')->group(function () {
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
 Route::post('login', [AuthController::class, 'login'])->middleware(['cors']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware(['cors']);
 Route::get('users', [UserController::class, 'allUsers'])->middleware(['cors']);
