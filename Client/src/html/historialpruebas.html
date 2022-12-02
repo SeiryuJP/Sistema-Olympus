@@ -4,32 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap w/ Webpack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <nav class="navbar cabecera">
         <h2><a class="nav-link" href="../index.html">Sistema Olympus</a></h2>
     </nav>
     <div class="container text-center">
-        <a href="pruebas.html"><button>Crear Prueba</button></a>
+        <a href="pruebas.html"><button class="crear-prueba">Crear Prueba</button></a>
         <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <div class="contenedor-tabla shadow bg-body rounded">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Dios</th>
-                            <th scope="col">Destino</th>
-                            <th scope="col">Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody class="lista">
-                    </tbody>
-                </table>
-            </div>  
+          <div class="col-1"></div>
+          <div class="col-10">
+            <div class="card text-center tabla">
+              <div class="card-header p-3">
+                <ul class="row nav nav-pills card-header-pills pe-4 ps-4 tabla-header">
+                  <li class="nav-item col-2">
+                    <a class="nav-link active" href="#">ID</a>
+                  </li>
+                  <li class="nav-item col-2">
+                    <a class="nav-link" href="#">Dios</a>
+                  </li>
+                  <li class="nav-item col-2">
+                    <a class="nav-link disabled">Destino</a>
+                  </li>
+                  <li class="nav-item col-4">
+                    <a class="nav-link disabled">Fecha</a>
+                  </li>
+                  <li class="nav-item col-2">
+                    <a class="nav-link disabled">Acción</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body contenedor-tabla">                
+              </div>
+            </div>
           </div>
-          <div class="col-2"></div>
+          <div class="col-1"></div>
         </div>
     </div>    
     <footer>

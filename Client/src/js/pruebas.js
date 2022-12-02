@@ -1,24 +1,40 @@
 import {obtenerListaPruebas} from './crud_pruebas';
+import { borrarPrueba } from './crud_pruebas';
 
-const lista = document.querySelector('.lista');
+const lista = document.querySelector('.contenedor-tabla');
+const edit = document.querySelectorAll('.edit');
 
 export const init = async() => {
     const pruebas = await obtenerListaPruebas();
     pruebas.forEach( crearFilaPrueba );
+    eliminarPrueba()
 }
 
 const crearFilaPrueba = ( prueba ) => {
-    const fila = (dios) => `
-        <th scope="row">${prueba.id}</th>
-        <td>${dios}</td>
-        <td>${prueba.destino}</td>
-        <td>${prueba.updated_at.slice(0, -8)}</td>
+    const fila = (dios, fecha) => `
+    <div class="card mb-3" id="p${prueba.id}">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">${prueba.id}</div>
+                <div class="col-2">${dios}</div>
+                <div class="col-2">${prueba.destino}</div>
+                <div class="col-4">${fecha.replace('T', ' | ')}</div>
+                <div class="col-2 acciones">
+                    <div class="row">
+                        <div class="col-6"><i class="fa fa-pencil-square edit" aria-hidden="true"></i></div>
+                        <div class="col-6"><i class="fa fa-trash delete" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     `;
 
     let dios = nombreDios(prueba.iddios);
-    const tr = document.createElement('tr');
-    tr.innerHTML = fila (dios);
-    lista.appendChild(tr);
+    let fecha = prueba.updated_at.slice(0, -8);
+    const div = document.createElement('div');
+    div.innerHTML = fila (dios, fecha);
+    lista.appendChild(div);
 }
 
 const nombreDios = (id) => {
@@ -37,272 +53,13 @@ const nombreDios = (id) => {
     return dios;
 }
 
-
-
-//const puntual = document.querySelector('.puntual');
-/* const eleccion = document.querySelector('.eleccion');
-const libre = document.querySelector('.libre');
-const valoracion = document.querySelector('.valoracion');
-const seleccion = document.querySelector('.seleccion');
-const divPrueba = document.querySelector('.contenedor'); 
-
-export const inicioPrueba = () => {
-    elegirPrueba();
+export const eliminarPrueba = () => {
+    const borrar = document.querySelectorAll('.delete');
+    borrar.forEach(boton => {
+        boton.addEventListener('click', () => {
+            let origen = boton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+            let id = origen.id.slice(1);
+            borrarPrueba(id);
+        });
+    });  
 }
-
-const elegirPrueba = () => {;
-    const crear = document.querySelector('.crear');
-    eleccion.addEventListener('click', () =>{
-        crear.className += " activa";
-        divPrueba.innerHTML = '';
-        crearPruebaEleccion();
-    });
-    valoracion.addEventListener('click', () =>{
-        crear.className += " activa";
-        divPrueba.innerHTML = '';
-        crearPruebaValoracion();
-    });
-    puntual.addEventListener('click', () =>{
-        crear.className += " activa";
-        divPrueba.innerHTML = '';
-        crearPruebaPuntual();
-    });
-    libre.addEventListener('click', () =>{
-        crear.className += " activa";
-        divPrueba.innerHTML = '';
-        crearPruebaRespuestaLibre();
-    });
-    seleccion.addEventListener('click', () =>{
-        crear.classList.remove("activa");
-        divPrueba.innerHTML = '';
-        crearSeleccionPrueba();
-    });
-}
-
-const crearPruebaEleccion = () => {
-    const htmlEleccion = `
-    <div>
-        <div class="titulos mb-4">
-          <h1 class="mb-3">Elección</h1>
-          <h6 class="mb-4">Escribe una pregunta con dos respuesta, una correcta y otra falsa</h6>
-        </div>
-        <form class="list-group eleccion" id="formulario" novalidate>
-            <p class="mb-3">Pregunta</p>
-            <div class="form-check mb-3">
-                <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Eres libre en tus elecciones?" required>
-                <span class="errorpregunta"></span>
-            </div>
-            <p class="mb-3">Respuestas</p>
-            <div class="form-check mb-3">
-                <label class="mb-2">Correcta : </label>
-                <input class="form-control respuesta" name="correcta" type="text" placeholder="Si" required>
-            </div>
-            <div class="form-check mb-3">
-                <label class="mb-2">Incorrecta : </label>
-                <input class="form-control respuesta mb-3" name="incorrecta" type="text" placeholder="No" required>
-                <span class="errorespuesta"></span>
-                <span class="erroradio"></span>
-            </div>
-            <p class="mb-3">Atributo</p>
-            <div class="form-check mb-3">
-                <label>Habilidad : 
-                    <select name="habilidad" class="form-select habilidad mt-2 mb-2" required>
-                    <option></option>
-                    <option value="sabiduria">Sabiduría</option>
-                    <option value="nobleza">Nobleza</option>
-                    <option value="virtud">Virtud</option>
-                    <option value="maldad">Maldad</option>
-                    <option value="audacia">Audacia</option>
-                    </select>
-                </label>
-                <span class="errorhabilidad mb-2"></span>
-            </div>
-            <p class="mb-3">Cantidad de Destino</p>
-            <div class="form-check mb-3">
-                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errordestino"></span>
-            </div>
-            <div class="confirmar mb-5">
-                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
-            </div>
-        </form>
-    </div>
-    `;
-
-    const div = document.createElement('div'); 
-    div.innerHTML = htmlEleccion;
-    divPrueba.append(div.lastElementChild);
-    validacion();
-}
-
-const crearPruebaPuntual = () =>{
-
-    const htmlPuntual = `
-    <div>
-        <div class="titulos mb-4">
-          <h1 class="mb-3">Puntual</h1>
-          <h6 class="mb-4">Rellena los campos para crear esta prueba</h6>
-        </div>
-        <form class="list-group puntual" id="formulario" novalidate>
-            <p class="mb-3">Descripción</p>
-            <div class="preguntas mb-2">
-                <div class="form-check">
-                    <textarea class="form-control mb-3 descripcion" name="descripcion" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                    <span class="errordescripcion"></span>
-                </div>
-            </div>
-            <p class="mb-3">Atributo</p>
-            <div class="form-check mb-3">
-                <label>Habilidad : 
-                    <select name="habilidad" class="form-select habilidad mt-2 mb-2" required>
-                        <option></option>
-                        <option value="sabiduria">Sabiduría</option>
-                        <option value="nobleza">Nobleza</option>
-                        <option value="virtud">Virtud</option>
-                        <option value="maldad">Maldad</option>
-                        <option value="audacia">Audacia</option>
-                    </select>
-                </label>
-                <span class="errorhabilidad mb-2"></span>
-            </div>
-            <p class="mb-3">Porcentaje de dificultad</p>
-            <div class="form-check mb-3">
-                <input name = "porcentaje" class="form-control porcentaje mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errorporcentaje"></span>
-            </div>
-            <p class="mb-3">Cantidad de Destino</p>
-            <div class="form-check mb-3">
-                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errordestino"></span>
-            </div>
-            <div class="confirmar mb-5">
-                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
-            </div>
-        </form>
-    </div>
-    `;
-
-    const div = document.createElement('div'); 
-    div.innerHTML = htmlPuntual;
-    divPrueba.append(div.lastElementChild);
-    validacion();    
-}
-
-const crearPruebaValoracion = () =>{
-
-    const htmlValoracion = `
-    <div>
-        <div class="titulos mb-4">
-          <h1 class="mb-3">Valoración</h1>
-          <h6 class="mb-4">Escribe múltiples preguntas y vinculalas a una habilidad</h6>
-        </div>
-        <form class="list-group valoracion" id="formulario" novalidate>
-            <p class="mb-3">Preguntas</p>
-            <div class="preguntas mb-2">
-                <div class="form-check">
-                    <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Eres libre en tus elecciones?" required>
-                    <span class="errorpregunta"></span>
-                </div>
-            </div>
-            <p class="mb-3">Atributo</p>
-            <div class="form-check mb-3">
-                <label>Habilidad : 
-                    <select name="habilidad" class="form-select habilidad mt-2 mb-2" required>
-                    <option></option>
-                    <option value="sabiduria">Sabiduría</option>
-                    <option value="nobleza">Nobleza</option>
-                    <option value="virtud">Virtud</option>
-                    <option value="maldad">Maldad</option>
-                    <option value="audacia">Audacia</option>
-                    </select>
-                </label>
-                <span class="errorhabilidad mb-2"></span>
-            </div>
-            <p class="mb-3">Cantidad de Destino</p>
-            <div class="form-check mb-3">
-                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errordestino"></span>
-            </div>
-            <div class="confirmar mb-5">
-                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
-            </div>
-        </form>
-    </div>
-    `;
-
-    const div = document.createElement('div'); 
-    div.innerHTML = htmlValoracion;
-    divPrueba.append(div.lastElementChild);
-    validacion();    
-}
-
-const crearPruebaRespuestaLibre = () =>{
-
-    const htmlLibre = `
-    <div>
-        <div class="titulos mb-4">
-          <h1 class="mb-3">Respuesta Libre</h1>
-          <h6 class="mb-4">Rellena los campos para crear esta prueba</h6>
-        </div>
-        <form class="list-group libre" id="formulario" novalidate>
-            <p class="mb-3">Preguntas</p>
-            <div class="preguntas mb-2">
-                <div class="form-check">
-                    <input class="form-control mb-3 pregunta" name="pregunta" type="text" placeholder="¿Cómo murió Heracles?" required>
-                    <span class="errorpregunta"></span>
-                </div>
-            </div>
-            <p class="mb-3">Palabras clave</p>
-            <div class="preguntas mb-2">
-                <div class="form-check">
-                    <label>Escribe palabras claves, separadas por #</label>
-                    <textarea class="form-control mb-3 mt-2 palabrasclaves" name="palabrasclaves" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                    <span class="errorpalabrasclaves"></span>
-                </div>
-            </div>
-            <p class="mb-3">Porcentaje de dificultad</p>
-            <div class="form-check mb-3">
-                <input name = "porcentaje" class="form-control porcentaje mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errorporcentaje"></span>
-            </div>
-            <p class="mb-3">Cantidad de Destino</p>
-            <div class="form-check mb-3">
-                <input name = "destino" class="form-control destino mb-3" type="number" placeholder="0" required max="100" min="0" minlength="1" maxlength="3">
-                <span class="errordestino"></span>
-            </div>
-            <div class="confirmar mb-5">
-                <button type="submit" class="btn btn-primary btn-lg mt-4">Crear</button>
-            </div>
-        </form>
-    </div>
-    `;
-
-    const div = document.createElement('div'); 
-    div.innerHTML = htmlLibre;
-    divPrueba.append(div.lastElementChild);
-    validacion();    
-}
-
-
-
-const crearSeleccionPrueba = () => {
-    const htmlPuntual = `
-    <div>
-        <div class="titulos mb-4">
-          <h1 class="mb-4">Crear prueba</h1>
-          <h6 class="mb-5">Elige el tipo de prueba que llevarán acabo los humanos</h6>
-        </div>
-        <div class="list-group">
-          <button type="button" class="btn btn-primary btn-lg mb-3 puntual">Puntuales</button>
-          <button type="button" class="btn btn-primary btn-lg mb-3 libre">Respuesta libre</button>
-          <button type="button" class="btn btn-primary btn-lg mb-3 eleccion">Elección</button>
-          <button type="button" class="btn btn-primary btn-lg mb-3 valoracion">Valoración</button>
-        </div>
-      </div>
-    `;
-
-    const div = document.createElement('div'); 
-    div.innerHTML = htmlPuntual;
-    divPrueba.append(div.lastElementChild);
-}
-*/

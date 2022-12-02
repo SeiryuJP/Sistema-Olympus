@@ -1,5 +1,25 @@
+@use "sass:map";
 @import "~bootstrap/scss/bootstrap";
-@import "animation"; 
+@import "animation", 'tabla'; 
+
+$tema:(
+    "colorPrimario": linear-gradient(to bottom right,  #ab5cf9, #baefe5),
+    "colorSecundario": linear-gradient(to bottom right,  #cfd9df, #e2ebf0),
+    "colorBase" : #cfd9df,
+    "colorBaseHover" : #ab5cf9,
+    "pesoBold":700,
+    "pesoSemiBold":600,
+    "pesoMedium":500,
+    "pesoRegular":400,
+    "pesoLight":300,
+    "texto" : 12pt,
+    "iconos" : 16pt,
+    //"tipografia": Quicksand,
+
+    "colorLetraBlanco": white,
+);
+
+@include tabla($tema);
 
 .proceso{
     display: flex;
@@ -68,35 +88,6 @@
             width: 55vh;
         }
     }
-}
-.container {
-    margin-top: 6vh;
-    .contenedor-tabla{
-        overflow-y: scroll;
-        max-height: 60vh;
-        margin: 3vh auto 13vh auto;
-        thead{
-            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
-            color: white;
-            border-radius: 10vh;
-        }
-    }
-    button{
-        background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
-        border-radius: 10vh;
-        border: none;
-        width: 20%;
-        font-size: 12pt;
-        padding: 1vh;
-        color: white;
-        font-weight: 500;
-    }
-    button:hover{
-        background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-        transition: all 0.5s;
-        @include zoom();
-    }
-
 }
 
 

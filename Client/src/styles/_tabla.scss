@@ -1,0 +1,65 @@
+@import "animation";
+@mixin tabla($tema) {
+    .container {
+        padding: 0;
+        .crear-prueba{
+            margin: 4vh auto 3vh auto;
+        }
+        .tabla{
+            margin-bottom: 5vh;
+            .tabla-header{
+                li{
+                    padding: 0;
+                    margin: auto;
+                    a{
+                        padding: 0;
+                        margin: auto;
+                    }
+                }
+            }
+            .contenedor-tabla{
+                overflow-y: scroll;
+                max-height: 61vh;
+                font-size: map-get($tema, "texto");
+                .acciones{
+                    width: 12%;
+                    text-align: center;
+                    margin: auto;                        
+                    i{
+                        cursor: pointer;
+                        color: map-get($tema, "colorBase");
+                        font-size: map-get($tema, "iconos");
+                        &:hover{
+                            color: map-get($tema, "colorBaseHover");
+                            transition: all 0.5s;
+                            @include zoom();
+                        }
+                    }
+                }
+            }
+            .contenedor-tabla::-webkit-scrollbar {
+                width: 8px;
+                background-color: rgb(246, 246, 246);
+            }
+            .contenedor-tabla::-webkit-scrollbar-thumb {
+                background: map.get($tema,"colorSecundario");
+                border-radius: 4px;
+            }
+        }
+        button{
+            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            border-radius: 10vh;
+            border: none;
+            width: 20%;
+            font-size: 12pt;
+            padding: 1vh;
+            color: white;
+            font-weight: 500;
+        }
+        button:hover{
+            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+            transition: all 0.5s;
+            @include zoom();
+        }
+    }
+}
