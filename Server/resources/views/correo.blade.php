@@ -21,6 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-        Verificacion de correo
+        <?php echo 'Bienvenido '.$userName.', por favor verifique su correo';?> <a href="http://127.0.0.1:8000/api/verification/?email=<?php echo $email?>">aqui</a>
     </body>
 </html>

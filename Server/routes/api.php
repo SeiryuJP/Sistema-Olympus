@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\VerificationMail;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -40,4 +40,6 @@ Route::prefix('prueba')->group(function () {
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
 Route::post('login', [AuthController::class, 'login'])->middleware(['cors']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['cors']);
+Route::get('verification', [VerificationController::class, 'verificateMail']);
+
 Route::get('users', [UserController::class, 'allUsers'])->middleware(['cors']);
