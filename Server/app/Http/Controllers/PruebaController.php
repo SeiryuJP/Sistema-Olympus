@@ -205,4 +205,16 @@ class PruebaController extends Controller
             return response()->json($prueba,200);
         }
     }
+
+    public function deletePrueba($id){
+
+        $prueba = Prueba::find($id);
+        if ($prueba){
+            $prueba->delete();
+            return response()->json(["success"=>true,"data"=>$parte, "message" => "Deleted"],200);
+        }
+        else {
+            return response()->json(["success"=>true, "message" => "Prueba no encontrada"],202);
+        }
+    }
 }

@@ -35,6 +35,8 @@ Route::prefix('prueba')->group(function () {
 
     Route::get('listar', [PruebaController::class,'getPruebas']);
 
+    Route::delete('borrar/{id}', [PruebaController::class,'deletePrueba']);
+
 });
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);

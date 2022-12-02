@@ -7,7 +7,7 @@ const edit = document.querySelectorAll('.edit');
 export const init = async() => {
     const pruebas = await obtenerListaPruebas();
     pruebas.forEach( crearFilaPrueba );
-    eliminarPrueba()
+    eliminarPrueba();
 }
 
 const crearFilaPrueba = ( prueba ) => {
@@ -59,6 +59,7 @@ export const eliminarPrueba = () => {
         boton.addEventListener('click', () => {
             let origen = boton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
             let id = origen.id.slice(1);
+            origen.remove();
             borrarPrueba(id);
         });
     });  
