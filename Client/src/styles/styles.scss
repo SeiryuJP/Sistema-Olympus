@@ -1,6 +1,6 @@
 @use "sass:map";
 @import "~bootstrap/scss/bootstrap";
-@import "animation", 'tabla'; 
+@import "animation", 'tabla', 'pruebas'; 
 
 $tema:(
     "colorPrimario": linear-gradient(to bottom right,  #ab5cf9, #baefe5),
@@ -12,7 +12,10 @@ $tema:(
     "pesoMedium":500,
     "pesoRegular":400,
     "pesoLight":300,
+    "error" : 10pt,
     "texto" : 12pt,
+    "categoria" : 14pt,
+    "tamPasos" : 20pt,
     "iconos" : 16pt,
     //"tipografia": Quicksand,
 
@@ -20,75 +23,7 @@ $tema:(
 );
 
 @include tabla($tema);
-
-.proceso{
-    display: flex;
-    justify-content: space-around;
-    margin: 14vh auto 8vh auto;
-
-    div{
-        button{
-            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
-            border-radius: 10vh;
-            border: none;
-            font-size: 20pt; 
-            width: 10vh; 
-        }
-        .activa{
-            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-        }
-        p{
-            font-weight: 300;
-            text-align: center;
-        }
-    }    
-}
-
-.contenedor, .contenedor-prueba{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10vh;
-    .titulos{
-        border-bottom: 1px solid grey;
-    }
-    h6{
-        font-weight: 400;
-    }
-    .list-group{
-        width: 58vh;
-        p{
-            font-weight: 500;
-            font-size: 14pt;
-        }
-        button{
-            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
-            border-radius: 10vh;
-            border: none;
-            width: 80%;
-            font-size: 12pt;
-        }
-        .confirmar{
-            text-align: center;
-            button{
-                width: 30%;
-            }
-        }
-        button:hover{
-            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-            transition: all 0.5s;
-            @include zoom();
-        }
-        span{
-            font-size: 10pt;
-            font-weight: 300;
-            color: rgb(226, 59, 59);
-            display: block;
-        }
-        select{
-            width: 55vh;
-        }
-    }
-}
+@include pruebas($tema);
 
 
 /**************************ESTILO LOGIN Y REGISTRO**************************************/

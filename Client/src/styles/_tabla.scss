@@ -47,17 +47,17 @@
             }
         }
         button{
-            background: linear-gradient(to bottom right,  #cfd9df, #e2ebf0);
+            background: map.get($tema,"colorSecundario");
             border-radius: 10vh;
             border: none;
             width: 20%;
-            font-size: 12pt;
+            font-size: map-get($tema, "texto");
             padding: 1vh;
             color: white;
-            font-weight: 500;
+            font-weight: map.get($tema,"pesoMedium");
         }
         button:hover{
-            background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
+            background: map.get($tema,"colorPrimario");
             transition: all 0.5s;
             @include zoom();
         }

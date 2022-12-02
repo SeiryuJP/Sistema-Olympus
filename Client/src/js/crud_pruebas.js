@@ -12,7 +12,7 @@ export const obtenerListaPruebas = async() => {
 }
 
 export const borrarPrueba = async(id) => {
-    const resp = await fetch(`${urlBorrarPrueba}`, {
+    const resp = await fetch(`${urlBorrarPrueba}/${id}`, {
         method: 'DELETE'   
     });
 
