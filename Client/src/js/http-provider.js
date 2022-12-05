@@ -1,4 +1,5 @@
 const urlRegister = 'http://127.0.0.1:8000/api/register';
+const urlLogin = 'http://127.0.0.1:8000/api/login';
 const urlUsers = 'http://127.0.0.1:8000/api/users';
 
 export const registrar = async (usuario) => {
@@ -22,4 +23,15 @@ export const verUsuarios = async () => {
     catch(err) {
         throw err;
     }
+}
+
+export const login = async (usuario) => {
+    const response = await fetch(urlLogin, {
+        method: 'POST',
+        body: JSON.stringify(usuario),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
 }

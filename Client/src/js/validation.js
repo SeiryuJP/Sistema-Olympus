@@ -17,11 +17,9 @@ export const inicializar = () =>{
 const validation = () => {
     form.addEventListener('submit', (event) => {
             if(!email.validity.valid){
-               // mostrarErrorEmail();
                 event.preventDefault();
             }
             if(!password.validity.valid){
-                //mostrarErrorPassword();
                 event.preventDefault();
             }else{
             const data = new FormData(document.getElementById('registro'));
