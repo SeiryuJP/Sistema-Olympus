@@ -19,8 +19,13 @@ const validation = () => {
             const data = new FormData(document.getElementById('login'));
             const usuario = Object.fromEntries(data);
             login(usuario).then(result => {
-                if (result.success === true){
-                    window.location.href = "";
+                const role = result.data['role'];
+                console.log(role)
+                if (result.success === true && role === 'human'){
+                    window.location.href = "../html/perfilHumano.html";
+                }
+                else if (result.success === true && role === 'god') {
+                    window.location.href = "../html/perfilDios.html";
                 }
                 else {
                     console.log('fallo');

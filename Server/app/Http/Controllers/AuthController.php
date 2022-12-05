@@ -63,17 +63,18 @@ class AuthController extends Controller {
          if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $auth = Auth::user();
             if ($auth->email_verified_at != null){
-                $role = $auth->role;
                 switch ($auth->role) {
                     case 'human':
                         $success['token'] =  $auth->createToken('token'.$auth->id, ["read"])->plainTextToken;
                         $success['name'] =  $auth->name;
+                        $success['role'] = $auth->role;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
                     
                     case 'god':
                         $success['token'] =  $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
                         $success['name'] =  $auth->name;
+                        $success['role'] = $auth->role;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
                 }
