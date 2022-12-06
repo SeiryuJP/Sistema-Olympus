@@ -42,6 +42,7 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                prueba['tipo']='Respuesta Libre';
                 crearPruebaRespuestaLibre(prueba);
                 event.preventDefault();
             }
@@ -54,6 +55,8 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                prueba['tipo']='Puntual';
+                console.log(prueba);
                 crearPruebaPuntual(prueba);
                 event.preventDefault();
             }
@@ -66,6 +69,7 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                prueba['tipo']='Valoracion';
                 crearPruebaValoracion(prueba);
                 event.preventDefault();
             }
@@ -78,6 +82,7 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                prueba['tipo']='Eleccion';
                 crearPruebaEleccion(prueba);
                 event.preventDefault();
             }

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('puntual', function (Blueprint $table) {
             $table->unsignedBigInteger('idprueba');
             $table->foreign('idprueba')->references('id')->on('prueba')->onDelete('cascade');
-            $table->string('descripcion');
             $table->string('habilidad');
             $table->integer('porcentaje');
         });

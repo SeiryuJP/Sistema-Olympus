@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RespLibre extends Model
+class RespLibre extends Prueba
 {
     use HasFactory;
 

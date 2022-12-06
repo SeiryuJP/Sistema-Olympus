@@ -23,7 +23,9 @@ class PruebaController extends Controller
            ];
 
         $validator = Validator::make($input, [
-            'destino' => 'required|int|max:100'
+            'destino' => 'required|int|max:100',
+            'tipo' => 'required|string|max:255',
+            'pregunta' => 'required|string|max:255'
         ],$messages);
 
         if($validator->fails()){
@@ -33,6 +35,8 @@ class PruebaController extends Controller
         $datos = [
             'destino' => $req->destino,
             'iddios' => 1,
+            'tipo' => $req->tipo,
+            'pregunta' => $req->pregunta,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
@@ -56,7 +60,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'correcta' => 'required|string|max:255',
                 'incorrecta' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
@@ -68,7 +71,6 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'correcta' => $req->correcta,
                 'incorrecta' => $req->incorrecta,
                 'habilidad' => $req->habilidad,
@@ -96,7 +98,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
             ],$messages);
 
@@ -106,7 +107,6 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'habilidad' => $req->habilidad,
             ];
 
@@ -132,7 +132,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'descripcion' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
                 'porcentaje' => 'required|int|max:100',
             ],$messages);
@@ -143,7 +142,6 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'descripcion' => $req->descripcion,
                 'habilidad' => $req->habilidad,
                 'porcentaje' => $req->porcentaje,
             ];
@@ -170,7 +168,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'palabrasclaves' => 'required|string|max:255',
                 'porcentaje' => 'required|int|max:100',
             ],$messages);
@@ -181,7 +178,6 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'palabrasclaves' => $req->palabrasclaves,
                 'porcentaje' => $req->porcentaje,
             ];
@@ -200,10 +196,42 @@ class PruebaController extends Controller
 
     public function getPruebas(){
         {
-            $prueba = Prueba::all();
-
+            $prueba =[
+                    PruebaController::getPruebasValoracion(),
+                    PruebaController::getPruebasEleccion(),
+                    PruebaController::getPruebasRespLibre(),
+                    PruebaController::getPruebasPuntual()
+                ];
             return response()->json($prueba,200);
         }
+    }
+
+    public function getPruebasValoracion(){
+        $valoracion = Prueba::with(['pruebaValoracion'])
+        ->where('tipo', 'Valoracion')
+        ->get();
+        return $valoracion;
+    }
+
+    public function getPruebasEleccion(){
+        $eleccion = Prueba::with(['pruebaEleccion'])
+        ->where('tipo', 'Eleccion')
+        ->get();
+        return $eleccion;
+    }
+
+    public function getPruebasRespLibre(){
+        $libre = Prueba::with(['pruebaRespLibre'])
+        ->where('tipo', 'Respuesta Libre')
+        ->get();
+        return $libre;
+    }
+
+    public function getPruebasPuntual(){
+        $puntual = Prueba::with(['pruebaPuntual'])
+        ->where('tipo', 'Puntual')
+        ->get();
+        return $puntual;
     }
 
     public function deletePrueba($id){

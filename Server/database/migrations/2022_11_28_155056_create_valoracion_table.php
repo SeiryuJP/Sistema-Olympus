@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('valoracion', function (Blueprint $table) {
             $table->unsignedBigInteger('idprueba');
             $table->foreign('idprueba')->references('id')->on('prueba')->onDelete('cascade');
-            $table->string('pregunta');
             $table->string('habilidad');
         });
     }
