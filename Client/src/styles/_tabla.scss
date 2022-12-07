@@ -2,8 +2,32 @@
 @mixin tabla($tema) {
     .container {
         padding: 0;
-        .crear-prueba{
+        .container-info{
             margin: 4vh auto 3vh auto;
+            .info-eliminar{
+                float: left;
+                background-color: map.get($tema,"colorBase");
+                font-size: map-get($tema, "texto");
+                border-radius: 0.5rem;
+                color: #000;
+                @include desaparecer();
+            }
+            .crear-prueba{
+                float: right;
+                background: map.get($tema,"colorSecundario");
+                border-radius: 5vh;
+                border: none;
+                width: 50%;
+                font-size: map-get($tema, "texto");
+                padding: 1vh;
+                color: white;
+                font-weight: map.get($tema,"pesoMedium");
+                &:hover{
+                    background: map.get($tema,"colorPrimario");
+                    transition: all 0.5s;
+                    @include zoom();
+                }
+            }
         }
         .tabla{
             margin-bottom: 5vh;
@@ -14,27 +38,39 @@
                     a{
                         padding: 0;
                         margin: auto;
+                        color: #000;
+                        font-size: map.get($tema,"categoria");
+                        font-weight: map.get($tema,"pesoMedium");
                     }
                 }
             }
             .contenedor-tabla{
                 overflow-y: scroll;
-                max-height: 61vh;
+                height: 61vh;
                 font-size: map-get($tema, "texto");
-                .acciones{
-                    text-align: center;
-                    margin: auto;                        
-                    i{
-                        cursor: pointer;
-                        color: map-get($tema, "colorBase");
-                        font-size: map-get($tema, "iconos");
-                        &:hover{
-                            color: map-get($tema, "colorBaseHover");
-                            transition: all 0.5s;
-                            @include zoom();
+                .card-body{
+                    div{
+                        div{
+                            margin: 0;
+                            padding: 0;
                         }
+                        .acciones{
+                            text-align: center;
+                            margin: auto;                        
+                            i{
+                                cursor: pointer;
+                                color: map-get($tema, "colorBase");
+                                font-size: map-get($tema, "iconos");
+                                &:hover{
+                                    color: map-get($tema, "colorBaseHover");
+                                    transition: all 0.5s;
+                                    @include zoom();
+                                }
+                            }
+                        }
+                        
                     }
-                }
+                } 
             }
             .contenedor-tabla::-webkit-scrollbar {
                 width: 8px;
@@ -45,20 +81,37 @@
                 border-radius: 4px;
             }
         }
-        button{
-            background: map.get($tema,"colorSecundario");
-            border-radius: 10vh;
-            border: none;
-            width: 20%;
-            font-size: map-get($tema, "texto");
-            padding: 1vh;
-            color: white;
-            font-weight: map.get($tema,"pesoMedium");
-        }
-        button:hover{
-            background: map.get($tema,"colorPrimario");
-            transition: all 0.5s;
-            @include zoom();
+    }
+    .modal{
+        display: none;
+        position: fixed; 
+        z-index: 1; 
+        height: 100vh;
+        overflow: auto; 
+        background-color: map.get($tema,"sombra"); 
+        .modal-dialog{
+            margin-top: 20vh;
+            .contenedor-modal{
+                .modal-header{
+                    background: map.get($tema,"colorPrimario");
+                }
+                .modal-footer{
+                    button{
+                        background: map.get($tema,"colorSecundario");
+                        border-radius: 10vh;
+                        border: none;
+                        width: 28%;
+                        margin-left: 1rem;
+                        padding: 0.3rem;
+                        font-size: map-get($tema, "texto"); 
+                        &:hover{
+                            background: map.get($tema,"colorPrimario");
+                            transition: all 0.5s;
+                            @include zoom();
+                        }
+                    }
+                }
+            }
         }
     }
 }

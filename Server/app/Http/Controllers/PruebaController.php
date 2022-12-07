@@ -78,14 +78,13 @@ class PruebaController extends Controller
 
             $eleccion = Eleccion::create($datos);
             if ($eleccion){
-                return response()->json(["success"=>true,"data"=>$eleccion, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
-
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
     }
 
     public function insertPruebaValoracion(Request $req){
@@ -112,13 +111,13 @@ class PruebaController extends Controller
 
             $valoracion = Valoracion::create($datos);
             if ($valoracion){
-                return response()->json(["success"=>true,"data"=>$valoracion, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
 
     }
 
@@ -148,13 +147,13 @@ class PruebaController extends Controller
 
             $puntual = Puntual::create($datos);
             if ($puntual){
-                return response()->json(["success"=>true,"data"=>$puntual, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
 
     }
 
@@ -184,14 +183,13 @@ class PruebaController extends Controller
 
             $libre = RespLibre::create($datos);
             if ($libre){
-                return response()->json(["success"=>true,"data"=>$libre, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
-
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
     }
 
     public function getPruebas(){
@@ -239,10 +237,10 @@ class PruebaController extends Controller
         $prueba = Prueba::find($id);
         if ($prueba){
             $prueba->delete();
-            return response()->json(["success"=>true,"data"=>$parte, "message" => "Deleted"],200);
+            return response()->json($mensaje = "Borrado con éxito", 200);
         }
         else {
-            return response()->json(["success"=>true, "message" => "Prueba no encontrada"],202);
+            return response()->json($mensaje = "No se pudo borrar", 202);
         }
     }
 }

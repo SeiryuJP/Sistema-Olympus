@@ -5,6 +5,8 @@ import {listPruebas} from './indexListado';
 
 const divLista = document.querySelector('.contenedor-tabla');
 const edit = document.querySelectorAll('.edit');
+const divModal = document.querySelector('.contenedor-modal');
+const modal = document.querySelector('.modal');
 
 export const init = async() => {
     const pruebas = await obtenerListaPruebas();
@@ -27,8 +29,8 @@ const crearPrueba = (prueba) => {
 
 const crearFilaPrueba = ( prueba ) => {
     const fila = (dios, fecha) => `
-    <div class="card mb-3 ps-4 pe-1" id="p${prueba.id}">
-        <div class="card-body">
+    <div class="card mb-3" id="p${prueba.id}">
+        <div class="card-body p-3">
             <div class="row">
                 <div class="col-2">${prueba.tipo}</div>
                 <div class="col-1">${dios}</div>
@@ -69,14 +71,60 @@ const nombreDios = (id) => {
 }
 
 export const eliminarPrueba = () => {
+    const infoEliminar = document.querySelector('.info-eliminar');
     const borrar = document.querySelectorAll('.delete');
     borrar.forEach(boton => {
         boton.addEventListener('click', () => {
+            infoEliminar.textContent = ''; 
             let origen = boton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-            let id = origen.id.slice(1);
-            listPruebas.eliminarPrueba(id);
-            origen.remove();
-            borrarPrueba(id);
+            modal.style.display = "block";
+            crearModalBorrar(origen)
         });
     });  
 }
+
+const confirmarEliminarPrueba = async(id) =>{
+    const infoEliminar = document.querySelector('.info-eliminar');
+    let mensajeBorrar = await borrarPrueba(id);
+    infoEliminar.textContent = mensajeBorrar;  
+    infoEliminar.style.padding = "0.4rem 1rem";  
+}
+
+const crearModalBorrar = (origen) => {
+    const modal = () => `
+        <div class="modal-header">
+            <h5 class="modal-title">Borrar</h5>
+        </div>
+        <div class="modal-body">
+            <p>¿Estás seguro de querer borrar la prueba?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-aceptar">Aceptar</button>
+            <button type="button" class="btn-cerrar">Cerrar</button>
+        </div>
+        `;
+    const div = document.createElement('div');
+    div.innerHTML = modal();
+    console.log(div);
+    console.log(divModal);
+    divModal.appendChild(div);
+    cerrarModal(origen);
+}
+
+const cerrarModal = (origen) =>{
+    const btnCerrar = document.querySelector('.btn-cerrar');
+    btnCerrar.addEventListener('click', () => {
+        modal.style.display = "none";
+        divModal.innerHTML = '';
+    });
+    const btnAceptar = document.querySelector('.btn-aceptar');
+    btnAceptar.addEventListener('click', () => {
+        let id = origen.id.slice(1);
+        listPruebas.eliminarPrueba(id);
+        origen.remove();
+        confirmarEliminarPrueba(id);
+        modal.style.display = "none";
+        divModal.innerHTML = '';
+    });
+}
+

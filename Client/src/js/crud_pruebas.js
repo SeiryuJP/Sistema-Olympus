@@ -15,8 +15,7 @@ export const borrarPrueba = async(id) => {
     const resp = await fetch(`${urlBorrarPrueba}/${id}`, {
         method: 'DELETE'   
     });
-
-    return ( resp.ok ) ? 'Borrado': 'No se pudo eliminar';
+    return await resp.json();
 }
 
 const crearPruebaEleccion = async(prueba) => {
