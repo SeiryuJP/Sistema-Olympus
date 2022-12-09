@@ -36,8 +36,8 @@ class AuthController extends Controller {
         $input['password'] = bcrypt($input['password']);
         $input['role'] = "human";
         $user = User::create($input);
-        $success['token']  = $user->createToken('token'.$user['id'], ["read","create"])->plainTextToken;
-        $success['name'] =  $user->name;
+        $success['token'] = $user->createToken('token'.$user['id'], ["read","create"])->plainTextToken;
+        $success['name'] = $user->name;
         VerificationMail::sendMail($user->email, $user->name);
         $dataH = [
             'ID' => $user->id,
@@ -65,16 +65,20 @@ class AuthController extends Controller {
             if ($auth->email_verified_at != null){
                 switch ($auth->role) {
                     case 'human':
-                        $success['token'] =  $auth->createToken('token'.$auth->id, ["read"])->plainTextToken;
-                        $success['name'] =  $auth->name;
+                        $success['token'] = $auth->createToken('token'.$auth->id, ["read"])->plainTextToken;
+                        $success['name'] = $auth->name;
+                        $success['password'] = $request->password;
                         $success['role'] = $auth->role;
+                        $success['avatar'] = $auth->avatar;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
                     
                     case 'god':
-                        $success['token'] =  $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
-                        $success['name'] =  $auth->name;
+                        $success['token'] = $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
+                        $success['name'] = $auth->name;
+                        $success['password'] = $auth->password;
                         $success['role'] = $auth->role;
+                        $success['avatar'] = $auth->avatar;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
                 }
@@ -90,8 +94,8 @@ class AuthController extends Controller {
 
     public function logout(Request $request){
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            $cantidad = Auth::user()->tokens()->delete();
-            return response()->json(["success"=>$cantidad, "message" => "Tokens Revoked"],200);
+            Auth::user()->tokens()->delete();
+            return response()->json(["success"=>true, "message" => "Tokens Revoked"],200);
         }
         else {
             return response()->json("Unauthorised",204);

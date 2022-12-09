@@ -20,11 +20,12 @@ const validation = () => {
             const usuario = Object.fromEntries(data);
             login(usuario).then(result => {
                 const role = result.data['role'];
-                console.log(role)
                 if (result.success === true && role === 'human'){
+                    localStorage.setItem('user', JSON.stringify(result.data));
                     window.location.href = "../html/perfilHumano.html";
                 }
                 else if (result.success === true && role === 'god') {
+                    localStorage.setItem('user', JSON.stringify(result.data));
                     window.location.href = "../html/perfilDios.html";
                 }
                 else {
