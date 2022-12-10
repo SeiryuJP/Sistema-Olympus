@@ -38,7 +38,15 @@ const filesHTML = [
     {
         filename: './html/listadoUsuarios.html',
         chunks: ['listadoUsuarios']
-    }
+    },
+    {
+        filename: './html/perfilHumano.html',
+        chunks: ['perfilHumano']
+    },
+    {
+        filename: './html/perfilDios.html',
+        chunks: ['perfilDios']
+    },
 ]
 
 module.exports = {
@@ -96,8 +104,10 @@ module.exports = {
         pruebasPuntual: './src/js/indexValidacion.js',
         pruebasRespLibre: './src/js/indexValidacion.js',
         listadoPruebas: './src/js/indexListado.js',
-        registro: './src/index.js',
-        listadoUsuarios: './src/js/listadoUsuarios.js'
+        registro: './src/js/registro.js',
+        listadoUsuarios: './src/js/listadoUsuarios.js',
+        perfilHumano: './src/js/perfilHumano.js',
+        perfilDios: './src/js/perfilDios.js'
     },
     plugins: [
         new MiniCssExtractPlugin({
