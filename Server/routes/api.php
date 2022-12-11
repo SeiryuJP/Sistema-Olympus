@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\midDios;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,23 +20,23 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-Route::prefix('prueba')->group(function () {
+Route::middleware('auth:sanctum')->prefix('prueba')->group(function () {
 
-    Route::post('eleccion/crear', [PruebaController::class,'insertPruebaEleccion']);
+    Route::post('eleccion/crear', [PruebaController::class,'insertPruebaEleccion'])->middleware(['midDios']);
 
-    Route::post('valoracion/crear', [PruebaController::class,'insertPruebaValoracion']);
+    Route::post('valoracion/crear', [PruebaController::class,'insertPruebaValoracion'])->middleware(['midDios']);
 
-    Route::post('puntual/crear', [PruebaController::class,'insertPruebaPuntual']);
+    Route::post('puntual/crear', [PruebaController::class,'insertPruebaPuntual'])->middleware(['midDios']);
 
-    Route::post('resplibre/crear', [PruebaController::class,'insertPruebaRespLibre']);
+    Route::post('resplibre/crear', [PruebaController::class,'insertPruebaRespLibre'])->middleware(['midDios']);
 
-    Route::get('listar', [PruebaController::class,'getPruebas']);
+    Route::get('listar', [PruebaController::class,'getPruebas'])->middleware(['midDios']);
 
-    Route::delete('borrar/{id}', [PruebaController::class,'deletePrueba']);
+    Route::delete('borrar/{id}', [PruebaController::class,'deletePrueba'])->middleware(['midDios']);
 
 });
 

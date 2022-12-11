@@ -4,13 +4,16 @@
         padding: 0;
         .container-info{
             margin: 4vh auto 3vh auto;
-            .info-eliminar{
-                float: left;
-                background-color: map.get($tema,"colorBase");
-                font-size: map-get($tema, "texto");
-                border-radius: 0.5rem;
-                color: #000;
-                @include desaparecer();
+            p{
+                margin: 0;
+                .info-eliminar{
+                    float: left;
+                    background-color: map.get($tema,"colorBase");
+                    font-size: map-get($tema, "texto");
+                    border-radius: 0.5rem;
+                    color: #000;
+                    @include desaparecer();
+                }
             }
             .crear-prueba{
                 float: right;

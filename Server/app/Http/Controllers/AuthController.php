@@ -31,7 +31,7 @@ class AuthController extends Controller {
             return response()->json($validator->errors(),400);
         }
 
-        
+
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $input['role'] = "human";
@@ -72,9 +72,10 @@ class AuthController extends Controller {
                         $success['avatar'] = $auth->avatar;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
-                    
+
                     case 'god':
                         $success['token'] = $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
+                        $success['id'] = $auth->id;
                         $success['name'] = $auth->name;
                         $success['password'] = $auth->password;
                         $success['role'] = $auth->role;
@@ -100,5 +101,5 @@ class AuthController extends Controller {
         else {
             return response()->json("Unauthorised",204);
         }
-    }  
+    }
 }

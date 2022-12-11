@@ -21,7 +21,6 @@ const conseguirPruebas = (pruebas) =>{
 }
 
 const crearPrueba = (prueba) => {
-    console.log(prueba);
     let newPrueba = new Prueba(prueba.id, prueba.tipo, prueba.iddios, prueba.pregunta, prueba.destino, prueba.updated_at);
     listPruebas.nuevaPrueba(newPrueba);
     crearFilaPrueba(newPrueba);
@@ -105,8 +104,6 @@ const crearModalBorrar = (origen) => {
         `;
     const div = document.createElement('div');
     div.innerHTML = modal();
-    console.log(div);
-    console.log(divModal);
     divModal.appendChild(div);
     cerrarModal(origen);
 }

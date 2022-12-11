@@ -34,7 +34,7 @@ class PruebaController extends Controller
 
         $datos = [
             'destino' => $req->destino,
-            'iddios' => 1,
+            'iddios' => $req->iddios,
             'tipo' => $req->tipo,
             'pregunta' => $req->pregunta,
             'created_at' => Carbon::now(),

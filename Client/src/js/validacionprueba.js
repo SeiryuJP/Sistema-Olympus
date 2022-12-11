@@ -44,6 +44,8 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
                 prueba['tipo']='Respuesta Libre';
                 let mensaje = await crearPruebaRespuestaLibre(prueba);
                 modal.style.display = "block";
@@ -59,8 +61,9 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
                 prueba['tipo']='Puntual';
-                console.log(prueba);
                 let mensaje = await crearPruebaPuntual(prueba);
                 modal.style.display = "block";
                 crearModalPrueba(mensaje);
@@ -75,6 +78,8 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
                 prueba['tipo']='Valoracion';
                 let mensaje = await crearPruebaValoracion(prueba);
                 modal.style.display = "block";
@@ -90,6 +95,8 @@ export const validacion = () => {
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
                 prueba['tipo']='Eleccion';
                 let mensaje = await crearPruebaEleccion(prueba);
                 modal.style.display = "block";
