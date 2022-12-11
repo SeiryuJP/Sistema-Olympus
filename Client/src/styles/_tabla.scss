@@ -98,6 +98,30 @@
                 .modal-header{
                     background: map.get($tema,"colorPrimario");
                 }
+                .modal-body{
+                    .card{
+                        .card-header{
+                            h6{
+                                margin: 0;
+                            }
+                        }
+                        .lista-candidatos{
+                            height: 37vh;
+                            overflow-y: scroll;
+                        }
+                        .lista-usuarios{
+                            height: 54vh;
+                            overflow-y: scroll;
+                            .card{
+                                .card-body{
+                                    p{
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 .modal-footer{
                     button{
                         background: map.get($tema,"colorSecundario");

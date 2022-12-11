@@ -2,16 +2,17 @@ import {obtenerListaPruebas} from './crud_pruebas';
 import { borrarPrueba } from './crud_pruebas';
 import { Prueba } from './classes/Prueba';
 import {listPruebas} from './indexListado';
+import {crearModalAsignar} from './asignar-prueba'
 
 const divLista = document.querySelector('.contenedor-tabla');
-const edit = document.querySelectorAll('.edit');
-const divModal = document.querySelector('.contenedor-modal');
+export const divModal = document.querySelector('.contenedor-modal');
 const modal = document.querySelector('.modal');
 
 export const init = async() => {
     const pruebas = await obtenerListaPruebas();
     conseguirPruebas(pruebas);
     eliminarPrueba();
+    asignarPrueba();
 }
 
 const conseguirPruebas = (pruebas) =>{
@@ -53,7 +54,7 @@ const crearFilaPrueba = ( prueba ) => {
     divLista.appendChild(div);
 }
 
-const nombreDios = (id) => {
+export const nombreDios = (id) => {
     let dios = '';
     switch(id){
         case 1:
@@ -81,6 +82,20 @@ export const eliminarPrueba = () => {
         });
     });  
 }
+
+export const asignarPrueba = () => {
+    const asignar = document.querySelectorAll('.edit');
+    asignar.forEach(boton => {
+        boton.addEventListener('click', () => {
+            let origen = boton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+            modal.style.display = "block";
+            crearModalAsignar(origen)
+        });
+    });  
+}
+
+
+
 
 const confirmarEliminarPrueba = async(id) =>{
     const infoEliminar = document.querySelector('.info-eliminar');
