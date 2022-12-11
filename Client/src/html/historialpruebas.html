@@ -4,34 +4,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap w/ Webpack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <nav class="navbar cabecera">
         <h2><a class="nav-link" href="../index.html">Sistema Olympus</a></h2>
     </nav>
     <div class="container text-center">
-        <a href="pruebas.html"><button>Crear Prueba</button></a>
-        <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <div class="contenedor-tabla shadow bg-body rounded">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Dios</th>
-                            <th scope="col">Destino</th>
-                            <th scope="col">Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody class="lista">
-                    </tbody>
-                </table>
-            </div>  
+      <div class="row container-info">
+        <p class=" col-8"><span class="info-eliminar"></span></p>
+        <a href="pruebas.html" class="col-4"><button class="crear-prueba"><i class="fa fa-plus" aria-hidden="true"></i> Prueba</button></a>
+      </div>
+        <div class="card text-center tabla">
+          <div class="card-header p-3">
+            <ul class="row nav nav-pills card-header-pills pe-4 ps-3 tabla-header">
+              <li class="nav-item col-2">
+                <a class="nav-link">Tipo</a>
+              </li>
+              <li class="nav-item col-1">
+                <a class="nav-link">Dios</a>
+              </li>
+              <li class="nav-item col-4">
+                <a class="nav-link">Pregunta / Descripción</a>
+              </li>
+              <li class="nav-item col-1">
+                <a class="nav-link">Destino</a>
+              </li>
+              <li class="nav-item col-3">
+                <a class="nav-link">Fecha</a>
+              </li>
+              <li class="nav-item col-1">
+                <a class="nav-link">Acción</a>
+              </li>
+            </ul>
           </div>
-          <div class="col-2"></div>
+          <div class="card-body contenedor-tabla">                
+          </div>
+        </div>   
+    </div>
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content contenedor-modal">
+          
         </div>
-    </div>    
+      </div>
+    </div>
     <footer>
       <span>&copy; Copyright - 2022 | Khattari - Miriam</span>
     </footer>

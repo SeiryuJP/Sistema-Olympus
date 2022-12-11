@@ -19,6 +19,8 @@ export const validacion = () => {
     const respuestaError = document.querySelector('.errorespuesta');
     const destinoError = document.querySelector('.errordestino');
     const habilidadError = document.querySelector('.errorhabilidad');
+    const divModal = document.querySelector('.contenedor-modal');
+    const modal = document.querySelector('.modal');
 
         form.addEventListener('submit', (event) => {
             limpiarError(); //Reinicia el valor de los errores
@@ -35,50 +37,70 @@ export const validacion = () => {
             event.preventDefault(); 
         });
 
-        const validarRespuestaLibre = (event) => {
+        const validarRespuestaLibre = async(event) => {
             if(!pregunta.validity.valid || !destino.validity.valid || !palabrasclaves.validity.valid || !porcentaje.validity.valid){
                 mostrarError();
                event.preventDefault(); 
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                crearPruebaRespuestaLibre(prueba);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
+                prueba['tipo']='Respuesta Libre';
+                let mensaje = await crearPruebaRespuestaLibre(prueba);
+                modal.style.display = "block";
+                crearModalPrueba(mensaje);
                 event.preventDefault();
             }
         }
 
-        const validarPuntual = (event) => {
+        const validarPuntual = async(event) => {
             if(!descripcion.validity.valid || !destino.validity.valid || !habilidad.validity.valid || !porcentaje.validity.valid){
                 mostrarError();
                event.preventDefault(); 
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                crearPruebaPuntual(prueba);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
+                prueba['tipo']='Puntual';
+                let mensaje = await crearPruebaPuntual(prueba);
+                modal.style.display = "block";
+                crearModalPrueba(mensaje);
                 event.preventDefault();
             }
         }
 
-        const validarValoracion = (event) => {
+        const validarValoracion = async(event) => {
             if(!pregunta.validity.valid || !destino.validity.valid || !habilidad.validity.valid){
                 mostrarError();
                event.preventDefault(); 
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                crearPruebaValoracion(prueba);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
+                prueba['tipo']='Valoracion';
+                let mensaje = await crearPruebaValoracion(prueba);
+                modal.style.display = "block";
+                crearModalPrueba(mensaje);
                 event.preventDefault();
             }
         }
 
-        const validarEleccion = (event) => {
+        const validarEleccion = async(event) => {
             if(!pregunta.validity.valid || !respuesta.validity.valid || !destino.validity.valid || !habilidad.validity.valid){
                 mostrarError();
                 event.preventDefault(); 
             } else {
                 const data = new FormData(document.getElementById('formulario'));
                 const prueba = Object.fromEntries(data);
-                crearPruebaEleccion(prueba);
+                let usuario = JSON.parse(localStorage.getItem('user'));
+                prueba['iddios'] = usuario.id;
+                prueba['tipo']='Eleccion';
+                let mensaje = await crearPruebaEleccion(prueba);
+                modal.style.display = "block";
+                crearModalPrueba(mensaje);
                 event.preventDefault();
             }
         }
@@ -141,6 +163,32 @@ export const validacion = () => {
             }
             porcentajeError.textContent = '';
         }
+    }
+
+    const crearModalPrueba = ( mensaje ) => {
+        const modal = () => `
+            <div class="modal-header">
+                <h5 class="modal-title">Registro</h5>
+            </div>
+            <div class="modal-body">
+                <p>${mensaje}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="./historialpruebas.html"><button type="button" class="btn-cerrar">Cerrar</button></a>
+            </div>
+            `;
+        const div = document.createElement('div');
+        div.innerHTML = modal();
+        divModal.appendChild(div);
+        cerrarModal();
+    }
+
+    const cerrarModal = () =>{
+        const btnCerrar = document.querySelector('.btn-cerrar');
+        btnCerrar.addEventListener('click', () => {
+            modal.style.display = "none";
+            divModal.innerHTML = '';
+        });
     }
 }
 

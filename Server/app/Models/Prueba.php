@@ -16,10 +16,26 @@ class Prueba extends Model
 
     protected $fillable = [
         'destino',
-        'iddios'
+        'iddios',
+        'pregunta',
+        'tipo'
     ];
 
     public function pruebaEleccion(){
         return $this->belongsTo('App\Models\Eleccion','id','idprueba');
     }
+
+    public function pruebaValoracion(){
+        return $this->belongsTo('App\Models\Valoracion','id','idprueba');
+    }
+
+    public function pruebaRespLibre(){
+        return $this->belongsTo('App\Models\RespLibre','id','idprueba');
+    }
+
+    public function pruebaPuntual(){
+        return $this->belongsTo('App\Models\Puntual','id','idprueba');
+    }
+
+
 }

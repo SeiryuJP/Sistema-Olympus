@@ -5,5 +5,8 @@ import '../styles/styles.scss'
 import * as bootstrap from 'bootstrap'
 
 import {init} from './pruebas';
+import {ListPrueba} from './classes/ListaPrueba'
+
 
 init();
+export let listPruebas = new ListPrueba();

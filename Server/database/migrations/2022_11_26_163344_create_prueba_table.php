@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('destino');
             $table->integer('iddios');
+            $table->string('tipo');
+            $table->string('pregunta');
             $table->timestamps();
         });
     }

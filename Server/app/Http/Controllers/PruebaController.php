@@ -23,7 +23,9 @@ class PruebaController extends Controller
            ];
 
         $validator = Validator::make($input, [
-            'destino' => 'required|int|max:100'
+            'destino' => 'required|int|max:100',
+            'tipo' => 'required|string|max:255',
+            'pregunta' => 'required|string|max:255'
         ],$messages);
 
         if($validator->fails()){
@@ -32,7 +34,9 @@ class PruebaController extends Controller
 
         $datos = [
             'destino' => $req->destino,
-            'iddios' => 1,
+            'iddios' => $req->iddios,
+            'tipo' => $req->tipo,
+            'pregunta' => $req->pregunta,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
@@ -56,7 +60,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'correcta' => 'required|string|max:255',
                 'incorrecta' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
@@ -68,7 +71,6 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'correcta' => $req->correcta,
                 'incorrecta' => $req->incorrecta,
                 'habilidad' => $req->habilidad,
@@ -76,14 +78,13 @@ class PruebaController extends Controller
 
             $eleccion = Eleccion::create($datos);
             if ($eleccion){
-                return response()->json(["success"=>true,"data"=>$eleccion, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
-
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
     }
 
     public function insertPruebaValoracion(Request $req){
@@ -96,7 +97,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
             ],$messages);
 
@@ -106,19 +106,18 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'habilidad' => $req->habilidad,
             ];
 
             $valoracion = Valoracion::create($datos);
             if ($valoracion){
-                return response()->json(["success"=>true,"data"=>$valoracion, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
 
     }
 
@@ -132,7 +131,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'descripcion' => 'required|string|max:255',
                 'habilidad' => 'required|string|max:255',
                 'porcentaje' => 'required|int|max:100',
             ],$messages);
@@ -143,20 +141,19 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'descripcion' => $req->descripcion,
                 'habilidad' => $req->habilidad,
                 'porcentaje' => $req->porcentaje,
             ];
 
             $puntual = Puntual::create($datos);
             if ($puntual){
-                return response()->json(["success"=>true,"data"=>$puntual, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
 
     }
 
@@ -170,7 +167,6 @@ class PruebaController extends Controller
             ];
 
             $validator = Validator::make($input, [
-                'pregunta' => 'required|string|max:255',
                 'palabrasclaves' => 'required|string|max:255',
                 'porcentaje' => 'required|int|max:100',
             ],$messages);
@@ -181,28 +177,70 @@ class PruebaController extends Controller
 
             $datos = [
                 'idprueba' => $prueba->id,
-                'pregunta' => $req->pregunta,
                 'palabrasclaves' => $req->palabrasclaves,
                 'porcentaje' => $req->porcentaje,
             ];
 
             $libre = RespLibre::create($datos);
             if ($libre){
-                return response()->json(["success"=>true,"data"=>$libre, "message" => "Created"]);
+                return response()->json($mensaje = "Prueba creada con éxito",200);
             }
             else {
                 Prueba::destroy($prueba->id);
             }
         }
-        return response()->json(["success" => false, "message" => "Error al insertar"],202);
-
+        return response()->json($mensaje = "No se consiguio registrar la prueba",202);
     }
 
     public function getPruebas(){
         {
-            $prueba = Prueba::all();
-
+            $prueba =[
+                    PruebaController::getPruebasValoracion(),
+                    PruebaController::getPruebasEleccion(),
+                    PruebaController::getPruebasRespLibre(),
+                    PruebaController::getPruebasPuntual()
+                ];
             return response()->json($prueba,200);
+        }
+    }
+
+    public function getPruebasValoracion(){
+        $valoracion = Prueba::with(['pruebaValoracion'])
+        ->where('tipo', 'Valoracion')
+        ->get();
+        return $valoracion;
+    }
+
+    public function getPruebasEleccion(){
+        $eleccion = Prueba::with(['pruebaEleccion'])
+        ->where('tipo', 'Eleccion')
+        ->get();
+        return $eleccion;
+    }
+
+    public function getPruebasRespLibre(){
+        $libre = Prueba::with(['pruebaRespLibre'])
+        ->where('tipo', 'Respuesta Libre')
+        ->get();
+        return $libre;
+    }
+
+    public function getPruebasPuntual(){
+        $puntual = Prueba::with(['pruebaPuntual'])
+        ->where('tipo', 'Puntual')
+        ->get();
+        return $puntual;
+    }
+
+    public function deletePrueba($id){
+
+        $prueba = Prueba::find($id);
+        if ($prueba){
+            $prueba->delete();
+            return response()->json($mensaje = "Borrado con éxito", 200);
+        }
+        else {
+            return response()->json($mensaje = "No se pudo borrar", 202);
         }
     }
 }
