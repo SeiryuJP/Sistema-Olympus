@@ -12,4 +12,10 @@ class UserController extends Controller
 
         return response()->json($pers,200);
     }
+
+    public function updateUser(Request $request) {
+        $user = User::find($request->id)->update(['password' => bcrypt($request->newPassword)]);
+
+        return response()->json($user,200);
+    }
 }

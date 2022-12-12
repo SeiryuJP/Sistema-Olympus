@@ -47,6 +47,14 @@ const filesHTML = [
         filename: './html/perfilDios.html',
         chunks: ['perfilDios']
     },
+    {
+        filename: './html/detallesDios.html',
+        chunks: ['detallesDios']
+    },
+    {
+        filename: './html/detallesHumano.html',
+        chunks: ['detallesHumano']
+    },
 ]
 
 module.exports = {
@@ -107,7 +115,9 @@ module.exports = {
         registro: './src/js/registro.js',
         listadoUsuarios: './src/js/listadoUsuarios.js',
         perfilHumano: './src/js/perfilHumano.js',
-        perfilDios: './src/js/perfilDios.js'
+        perfilDios: './src/js/perfilDios.js',
+        detallesDios: './src/js/detallesDios.js',
+        detallesHumano: './src/js/detallesHumano.js'
     },
     plugins: [
         new MiniCssExtractPlugin({

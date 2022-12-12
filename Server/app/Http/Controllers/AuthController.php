@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\VerificationMail;
+use App\Models\Atributes;
 
 class AuthController extends Controller {
     public function register(Request $request){
@@ -50,7 +51,9 @@ class AuthController extends Controller {
             $dataA = [
                 'atributeID' => $cont,
                 'userID' => $user->id,
-                'value' => rand(1, 5)
+                'value' => rand(1, 5),
+                'created_at' => now(),
+                'updated_at' => now()
             ];
             $atributesData = AtributesUsers::create($dataA);
             $cont++;
@@ -66,10 +69,21 @@ class AuthController extends Controller {
                 switch ($auth->role) {
                     case 'human':
                         $success['token'] = $auth->createToken('token'.$auth->id, ["read"])->plainTextToken;
+                        $success['id'] = $auth->id;
                         $success['name'] = $auth->name;
-                        $success['password'] = $request->password;
                         $success['role'] = $auth->role;
                         $success['avatar'] = $auth->avatar;
+                        $atribute = AtributesUsers::with(['atributos2'])->where('userID', $auth->id)->get();
+                        $fate = HumanData::where('ID', $auth->id)->get('fate');
+                        $success['fate'] = $fate[0]->fate;
+                        $atributes = [];
+                        foreach ($atribute as $atr) {
+                            array_push($atributes, [
+                                "name" => $atr->atributos2[0]->name,
+                                "value" => $atr->value
+                            ]);
+                        }
+                        $success['attributes'] = $atributes;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
 
@@ -77,9 +91,17 @@ class AuthController extends Controller {
                         $success['token'] = $auth->createToken('token'.$auth->id, ["read","delete","create"])->plainTextToken;
                         $success['id'] = $auth->id;
                         $success['name'] = $auth->name;
-                        $success['password'] = $auth->password;
                         $success['role'] = $auth->role;
                         $success['avatar'] = $auth->avatar;
+                        $atribute = AtributesUsers::with(['atributos2'])->where('userID', $auth->id)->get();
+                        $atributes = [];
+                        foreach ($atribute as $atr) {
+                            array_push($atributes, [
+                                "name" => $atr->atributos2[0]->name,
+                                "value" => $atr->value
+                            ]);
+                        }
+                        $success['attributes'] = $atributes;
                         return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
                         break;
                 }
