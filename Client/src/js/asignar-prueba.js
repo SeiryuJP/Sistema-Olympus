@@ -1,13 +1,10 @@
 import { Usuario } from './classes/Usuario';
-import { divModal } from "./pruebas";
-import { asignarPrueba } from "./pruebas";
+import { divModal,modal } from "./pruebas";
 import {listPruebas} from './indexListado';
 import {listUsuarios} from './indexListado';
 import { nombreDios } from "./pruebas";
 import { verUsuarios } from "./http-provider";
-
-const divCandidatos = document.querySelector('.lista-candidatos');
-
+import {addEventosDrop, drag} from './dragDrop';
 
 export const crearModalAsignar = (origen) => {
     let prueba = listPruebas.getPrueba(origen.id.slice(1));
@@ -28,7 +25,7 @@ export const crearModalAsignar = (origen) => {
                                 </select>
                             </div>
                         </div>
-                        <div class="card-body p-3 lista-usuarios">
+                        <div class="card-body p-3 lista-usuarios" id="user">
                         </div>
                     </div>
                 </div>
@@ -48,7 +45,7 @@ export const crearModalAsignar = (origen) => {
                         <div class="card-header">
                             <h6>Candidatos a la prueba</h6>
                         </div>
-                        <div class="card-body p-3 lista-candidatos">
+                        <div class="card-body p-3 lista-candidatos" id="cand">
                             
                         </div>
                     </div>
@@ -65,17 +62,14 @@ export const crearModalAsignar = (origen) => {
     divModal.parentElement.style.marginTop ="10vh";
     const div = document.createElement('div');
     let dios = nombreDios(prueba.iddios);
-    console.log(dios);
     div.innerHTML = modal(prueba, dios);
     divModal.appendChild(div);
-    conseguirUsuarios();
-    //cerrarModal(origen);
+    obtenerHumanos();
 }
 
-const conseguirUsuarios = async() =>{
+export const conseguirUsuarios = async() =>{
     const usuarios = await verUsuarios();
     usuarios.forEach(crearUsuario);
-    obtenerHumanos();
 }
 
 const crearUsuario = (usuario) =>{
@@ -84,18 +78,19 @@ const crearUsuario = (usuario) =>{
 }
 
 const obtenerHumanos = () =>{
+    let divUsuarios = document.querySelector('.lista-usuarios');
+    let divCandidatos = document.querySelector('.lista-candidatos');
     let humanos = [];
     humanos = listUsuarios.getHumanos();
-    console.log(humanos);
     humanos.forEach(crearFilaUsuario);
+    addEventosDrop(divUsuarios);
+    addEventosDrop(divCandidatos);
 }
 
 const crearFilaUsuario = (usuario) =>{
-    const divUsuarios = document.querySelector('.lista-usuarios');
-    console.log(usuario);
-    console.log(divUsuarios);
+    let divUsuarios = document.querySelector('.lista-usuarios');
     const fila = (usuario) => `
-        <div class="card mb-3" id="p${usuario.id}">
+        <div class="card mb-3" id="u${usuario.id}">
             <div class="card-body p-3">
                 <div class="row">
                     <div class="col-2">
@@ -111,5 +106,17 @@ const crearFilaUsuario = (usuario) =>{
         `;
     const div = document.createElement('div');
     div.innerHTML = fila (usuario);
+    div.firstElementChild.setAttribute('draggable', true);
+    drag(div.firstElementChild);
     divUsuarios.appendChild(div);
+    cerrarModal();
+}
+
+const cerrarModal = () =>{
+    const btnCerrar = document.querySelector('.btn-cerrar');
+    btnCerrar.addEventListener('click', () => {
+        modal.style.display = "none";
+        divModal.innerHTML = '';
+        console.log(listUsuarios);
+    });
 }

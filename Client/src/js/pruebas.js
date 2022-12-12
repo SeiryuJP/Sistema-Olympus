@@ -6,7 +6,7 @@ import {crearModalAsignar} from './asignar-prueba'
 
 const divLista = document.querySelector('.contenedor-tabla');
 export const divModal = document.querySelector('.contenedor-modal');
-const modal = document.querySelector('.modal');
+export const modal = document.querySelector('.modal');
 
 export const init = async() => {
     const pruebas = await obtenerListaPruebas();

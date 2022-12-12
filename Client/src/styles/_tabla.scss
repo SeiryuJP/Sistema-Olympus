@@ -108,6 +108,13 @@
                         .lista-candidatos{
                             height: 37vh;
                             overflow-y: scroll;
+                            .card{
+                                .card-body{
+                                    p{
+                                        margin: 0;
+                                    }
+                                }
+                            }
                         }
                         .lista-usuarios{
                             height: 54vh;
