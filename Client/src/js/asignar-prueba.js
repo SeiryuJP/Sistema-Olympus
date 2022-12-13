@@ -3,8 +3,10 @@ import { divModal,modal } from "./pruebas";
 import {listPruebas} from './indexListado';
 import {listUsuarios} from './indexListado';
 import { nombreDios } from "./pruebas";
-import { verUsuarios } from "./http-provider";
+import { conseguirHumanosAfines, conseguirHumanosAsignados } from './crud_usuarios';
+import { insertarUsuariosAsignados } from './crud_pruebas';
 import {addEventosDrop, drag} from './dragDrop';
+
 
 export const crearModalAsignar = (origen) => {
     let prueba = listPruebas.getPrueba(origen.id.slice(1));
@@ -19,7 +21,7 @@ export const crearModalAsignar = (origen) => {
                         <div class="card-header">
                             <div class="row">
                                 <h6 class="col-6">Usuarios</h6>
-                                <select class="col-6 opcion-usuario">
+                                <select class="col-6 opcion-usuario form-select" aria-label="Default select example">
                                     <option>Todos</option>
                                     <option>Afín</option>
                                 </select>
@@ -30,7 +32,7 @@ export const crearModalAsignar = (origen) => {
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card mb-3" id="p${prueba.id}">
+                    <div class="card prueba mb-3" id="p${prueba.id}">
                         <div class="card-header">
                            <h6>Prueba : ${prueba.tipo}</h6>
                         </div>
@@ -57,34 +59,53 @@ export const crearModalAsignar = (origen) => {
             <button type="button" class="btn-cerrar">Cerrar</button>
         </div>
         `;
-    
-    divModal.parentElement.style.maxWidth ="90%";
-    divModal.parentElement.style.marginTop ="10vh";
+
+    const divPadreModal = divModal.parentElement.style;
+    divPadreModal.maxWidth ="90%";
+    divPadreModal.marginTop ="10vh";
     const div = document.createElement('div');
     let dios = nombreDios(prueba.iddios);
     div.innerHTML = modal(prueba, dios);
     divModal.appendChild(div);
-    obtenerHumanos();
+    obtenerHumanos("Todos", prueba.iddios, prueba.id);
+    addEventos(prueba.iddios, prueba.id);
 }
 
-export const conseguirUsuarios = async() =>{
-    const usuarios = await verUsuarios();
-    usuarios.forEach(crearUsuario);
+const addEventos = (iddios, idprueba) =>{
+    let opciones = document.querySelector('.opcion-usuario');
+    opciones.addEventListener('change', () =>{
+        let opcion = opciones.value;
+        obtenerHumanos(opcion, iddios, idprueba);
+    });
+}
+
+const obtenerHumanos = async(opcion, iddios, idprueba) =>{
+    limpiarModal(); 
+
+    if(opcion == "Todos") {
+        let usuarios = await conseguirHumanosAsignados(iddios);
+        console.log(usuarios);
+        usuarios.forEach(crearUsuario);
+    }
+    else if(opcion == "Afín") {
+        let usuarios = await conseguirHumanosAfines(iddios, idprueba);
+        console.log(usuarios);
+        usuarios.forEach(elemento =>{
+            elemento.forEach(crearUsuario);
+        })
+    }
+
+    let divUsuarios = document.querySelector('.lista-usuarios');
+    let divCandidatos = document.querySelector('.lista-candidatos');
+
+    addEventosDrop(divUsuarios);
+    addEventosDrop(divCandidatos);
 }
 
 const crearUsuario = (usuario) =>{
     let newUsuario = new Usuario(usuario.id, usuario.name, usuario.email, usuario.avatar, usuario.role);
     listUsuarios.nuevoUsuario(newUsuario);
-}
-
-const obtenerHumanos = () =>{
-    let divUsuarios = document.querySelector('.lista-usuarios');
-    let divCandidatos = document.querySelector('.lista-candidatos');
-    let humanos = [];
-    humanos = listUsuarios.getHumanos();
-    humanos.forEach(crearFilaUsuario);
-    addEventosDrop(divUsuarios);
-    addEventosDrop(divCandidatos);
+    crearFilaUsuario(usuario);
 }
 
 const crearFilaUsuario = (usuario) =>{
@@ -97,7 +118,7 @@ const crearFilaUsuario = (usuario) =>{
                         <img>
                     </div>
                     <div class="col-10">
-                        <p><b>${usuario.nombre}</b></p>
+                        <p><b>${usuario.name}</b></p>
                         <p>${usuario.email}</p>
                     </div>
                 </div>
@@ -114,9 +135,36 @@ const crearFilaUsuario = (usuario) =>{
 
 const cerrarModal = () =>{
     const btnCerrar = document.querySelector('.btn-cerrar');
+    const btnAceptar = document.querySelector('.btn-aceptar');
     btnCerrar.addEventListener('click', () => {
+        limpiarModal();
         modal.style.display = "none";
         divModal.innerHTML = '';
-        console.log(listUsuarios);
     });
+    btnAceptar.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        let idUsuarios = [];
+        let divCandidatos = document.querySelector('.lista-candidatos');
+        let idPrueba = document.querySelector('.prueba').id.slice(1);
+        let hijos = divCandidatos.childNodes;
+        for (let i = 0; i < hijos.length; i++){
+            idUsuarios.push(hijos[i].id.slice(1));
+        }
+        for (let j = 0; j < idUsuarios.length; j++){
+            insertarUsuariosAsignados(idUsuarios[j], idPrueba);
+        }
+        limpiarModal();
+        modal.style.display = "none";
+        idUsuarios = [];
+        divModal.innerHTML = '';
+    });
+} 
+
+
+
+const limpiarModal = () =>{
+    let divUsuarios = document.querySelector('.lista-usuarios');
+    let divCandidatos = document.querySelector('.lista-candidatos');
+    divUsuarios.innerHTML='';
+    divCandidatos.innerHTML='';
 }
