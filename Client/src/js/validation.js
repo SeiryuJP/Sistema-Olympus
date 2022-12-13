@@ -25,13 +25,30 @@ const validation = () => {
             const data = new FormData(document.getElementById('registro'));
             const usuario = Object.fromEntries(data);
             usuario["role"] = "human";
-            registrar(usuario).then(console.log);
+            registrar(usuario).then(result => {
+                const modal = document.getElementById('modalRegistro');
+                const parrafo = document.getElementById('parrafo');
+                const close = document.getElementsByClassName('close')[0];
+                if (result.success === true){
+                    parrafo.innerHTML = 'Cuenta registrada correctamente, porfavor verifique su correo';
+                    modal.style.display = 'block';
+                    close.addEventListener('click', (event) => {
+                        modal.style.display = "none";
+                    }) 
+                    name.value = "";
+                    email.value = "";
+                    password.value = "";
+                    confirm_password.value = "";
+                }
+                else {
+                    modal.style.display = 'block';
+                    parrafo.innerHTML = 'Ha ocurrido un error';
+                    close.addEventListener('click', (event) => {
+                        modal.style.display = "none";
+                    }) 
+                }
+            });
             event.preventDefault();
-            name.value = "";
-            email.value = "";
-            password.value = "";
-            confirm_password.value = "";
         }
     });
 }
-

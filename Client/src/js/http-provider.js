@@ -45,5 +45,6 @@ export const logOut = async (usuario) => {
             'Content-Type': 'application/json'
         }
     });
-    return await response.text();
+    console.log(response);
+    // return await response.json();
 }
