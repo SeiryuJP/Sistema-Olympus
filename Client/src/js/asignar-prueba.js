@@ -69,6 +69,7 @@ export const crearModalAsignar = (origen) => {
     divModal.appendChild(div);
     obtenerHumanos("Todos", prueba.iddios, prueba.id);
     addEventos(prueba.iddios, prueba.id);
+    cerrarModal();
 }
 
 const addEventos = (iddios, idprueba) =>{
@@ -130,7 +131,7 @@ const crearFilaUsuario = (usuario) =>{
     div.firstElementChild.setAttribute('draggable', true);
     drag(div.firstElementChild);
     divUsuarios.appendChild(div);
-    cerrarModal();
+
 }
 
 const cerrarModal = () =>{
