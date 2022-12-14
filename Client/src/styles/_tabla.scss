@@ -41,7 +41,7 @@
                     }
                 }
             }
-            .contenedor-tabla{
+            .contenedor-tabla, .contenedor-tabla-usuarios{
                 overflow-y: scroll;
                 height: 58vh;
                 font-size: map-get($tema, "texto");
@@ -69,11 +69,11 @@
                     }
                 } 
             }
-            .contenedor-tabla::-webkit-scrollbar {
+            .contenedor-tabla::-webkit-scrollbar, .contenedor-tabla-usuarios::-webkit-scrollbar {
                 width: 8px;
                 background-color: rgb(246, 246, 246);
             }
-            .contenedor-tabla::-webkit-scrollbar-thumb {
+            .contenedor-tabla::-webkit-scrollbar-thumb, .contenedor-tabla-usuarios::-webkit-scrollbar-thumb {
                 background: map.get($tema,"colorSecundario");
                 border-radius: 4px;
             }

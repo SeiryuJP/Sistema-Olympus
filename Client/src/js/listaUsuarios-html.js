@@ -1,23 +1,35 @@
-import { verUsuarios } from "./http-provider";
+import {conseguirHumanosAsignados} from './crud_usuarios'
+import { Usuario } from './classes/Usuario';
+import { listUsuarios } from './listadoUsuarios';
 
-let tBody = document.querySelector('tbody');
+const divListaUsuarios = document.querySelector('.contenedor-tabla-usuarios');
 
 export const init = async() => {
-    const usuarios = await verUsuarios();
-    console.log(usuarios);
-    usuarios.forEach(crearFilaUsuarios);
+    let usuario = JSON.parse(localStorage.getItem('user'));
+    const usuarios = await conseguirHumanosAsignados(usuario.id);
+    usuarios.forEach(crearUsuario);
 }
 
-const crearFilaUsuarios = (usuario) => {
-    const html = `
-        <td scope="col"> ${usuario.ID} </td>
-        <td scope="col"> ${usuario.name} </td>
-        <td scope="col"> ${usuario.email} </td>
-        <td scope="col"> ${usuario.role} </td>
+const crearUsuario = (usuario) => {
+    let newUsuario = new Usuario(usuario.id, usuario.name, usuario.email, usuario.avatar, usuario.role);
+    listUsuarios.nuevoUsuario(newUsuario) ;
+    crearFilaUsuario(newUsuario);
+}
+
+const crearFilaUsuario = ( usuario ) => {
+    const fila = () => `
+    <div class="card mb-3" id="p${usuario.id}">
+        <div class="card-body p-3">
+            <div class="row">
+                <div class="col-2"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <div class="col-2">${usuario.id}</div>
+                <div class="col-4">${usuario.nombre}</div>
+                <div class="col-4">${usuario.email}</div>
+            </div>
+        </div>
+    </div>
     `;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = html;
-
-    tBody.appendChild(tr);
+    const div = document.createElement('div');
+    div.innerHTML = fila ();
+    divListaUsuarios.appendChild(div);
 }
