@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\VerificationMail;
 use App\Models\Atributes;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller {
     public function register(Request $request){
@@ -72,7 +73,9 @@ class AuthController extends Controller {
                         $success['id'] = $auth->id;
                         $success['name'] = $auth->name;
                         $success['role'] = $auth->role;
+                        $success['password'] = $auth->password;
                         $success['avatar'] = $auth->avatar;
+                        $success['email'] = $auth->email;
                         $atribute = AtributesUsers::with(['atributos2'])->where('userID', $auth->id)->get();
                         $fate = HumanData::where('ID', $auth->id)->get('fate');
                         $success['fate'] = $fate[0]->fate;
@@ -92,7 +95,9 @@ class AuthController extends Controller {
                         $success['id'] = $auth->id;
                         $success['name'] = $auth->name;
                         $success['role'] = $auth->role;
+                        $success['password'] = $auth->password;
                         $success['avatar'] = $auth->avatar;
+                        $success['email'] = $auth->email;
                         $atribute = AtributesUsers::with(['atributos2'])->where('userID', $auth->id)->get();
                         $atributes = [];
                         foreach ($atribute as $atr) {
@@ -116,12 +121,8 @@ class AuthController extends Controller {
     }
 
     public function logout(Request $request){
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            Auth::user()->tokens()->delete();
-            return response()->json(["success"=>true, "message" => "Tokens Revoked"],200);
-        }
-        else {
-            return response()->json("Unauthorised",204);
-        }
+        $user = User::find($request->id);
+        $tokens = DB::table('personal_access_tokens')->where('tokenable_id', '=', $user->id)->delete();
+        return response()->json(["success"=>true, "message" => "Tokens Revoked"],200);
     }
 }

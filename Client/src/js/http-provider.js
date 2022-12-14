@@ -46,8 +46,7 @@ export const logOut = async (usuario) => {
             'Content-Type': 'application/json'
         }
     });
-    console.log(response);
-    // return await response.json();
+    return await response.json();
 }
 
 export const updatePassword = async (data) => {
@@ -58,6 +57,5 @@ export const updatePassword = async (data) => {
             'Content-Type': 'application/json'
         }
     });
-    console.log(response);
-    // return await response.json();
+    return await response.json();
 }

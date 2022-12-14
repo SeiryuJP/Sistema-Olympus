@@ -57,5 +57,5 @@ Route::prefix('user')->group(function () {
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
 Route::post('login', [AuthController::class, 'login'])->middleware(['cors']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware(['cors']);
+Route::post('logout', [AuthController::class, 'logout']);
 Route::get('verification', [VerificationController::class, 'verificateMail']);

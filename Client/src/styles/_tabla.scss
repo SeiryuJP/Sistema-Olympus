@@ -4,23 +4,14 @@
         padding: 0;
         .container-info{
             margin: 4vh auto 3vh auto;
-            p{
-                margin: 0;
-                .info-eliminar{
-                    float: left;
-                    background-color: map.get($tema,"colorBase");
-                    font-size: map-get($tema, "texto");
-                    border-radius: 0.5rem;
-                    color: #000;
-                    @include desaparecer();
-                }
-            }
             .crear-prueba{
                 float: right;
+            }
+            .crear-prueba, .volver{
                 background: map.get($tema,"colorSecundario");
                 border-radius: 5vh;
                 border: none;
-                width: 50%;
+                width: 40%;
                 font-size: map-get($tema, "texto");
                 padding: 1vh;
                 color: white;
@@ -30,6 +21,9 @@
                     transition: all 0.5s;
                     @include zoom();
                 }
+            }
+            .volver {
+                float: left;
             }
         }
         .tabla{
@@ -49,7 +43,7 @@
             }
             .contenedor-tabla{
                 overflow-y: scroll;
-                height: 61vh;
+                height: 58vh;
                 font-size: map-get($tema, "texto");
                 .card-body{
                     div{
