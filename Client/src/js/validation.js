@@ -65,8 +65,11 @@ const validUpdate = () => {
         if(!password.validity.valid){
             event.preventDefault();
         }else{
+        const locale = JSON.parse(localStorage.getItem('user'));
         const data = new FormData(document.getElementById('registro'));
         const update = Object.fromEntries(data);
+        update['id'] = locale.id;
+        console.log(update);
         updatePassword(update).then(result => {
             const modal = document.getElementById('modalRegistro');
             const parrafo = document.getElementById('parrafo');
@@ -78,7 +81,7 @@ const validUpdate = () => {
                     modal.style.display = "none";
                 }) 
                 password.value = "";
-                newPassword.value = "";
+                new_password.value = "";
                 confirm_password.value = "";
             }
         });
