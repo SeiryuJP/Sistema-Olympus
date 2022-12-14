@@ -3,7 +3,8 @@ const urlLogin = 'http://127.0.0.1:8000/api/login';
 const urlLogOut = 'http://127.0.0.1:8000/api/logout';
 const urlUsers = 'http://127.0.0.1:8000/api/user/users';
 const urlUpdatePassword = 'http://127.0.0.1:8000/api/user/update';
-const urlUpdateAttributes = 'http://127.0.0.1:8000/api/user/updateattributes'
+const urlUpdateAttributes = 'http://127.0.0.1:8000/api/user/updateattributes';
+const urlGenerateUsers = 'http://127.0.0.1:8000/api/user/create';
 
 export const registrar = async (usuario) => {
     const response = await fetch(urlRegister, {
@@ -70,4 +71,15 @@ export const updateAttributes = async (data) => {
         }
     });
     return await response.json();
+}
+
+export const generateUsers = async (data) => {
+    try {
+        const response = await fetch(urlGenerateUsers+'/'+data.id+'/'+data.number);
+        if (!response.ok) throw ('No se pudo realizar la peticion');
+        return await response.json();
+    }
+    catch(err) {
+        throw err;
+    }
 }

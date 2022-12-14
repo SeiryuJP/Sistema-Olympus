@@ -50,11 +50,11 @@ Route::middleware('auth:sanctum')->prefix('asignar')->group(function () {
     Route::post('asignarprueba', [AsignarController::class,'insertarUsuariosAsignados']);
 });
 
-Route::middleware('auth:sanctum')->prefix('user')->group(function () {
+Route::prefix('user')->group(function () {
     // Route::get('users', [UserController::class, 'allUsers'])->middleware(['midDios'])->middleware(['cors']);
     Route::put('update', [UserController::class, 'updateUser'])->middleware(['cors']);
     Route::put('updateattributes', [UserController::class, 'updateAttributes']);
-    Route::get('create/{number}', [UserController::class, 'createUsers']);
+    Route::get('create/{id}/{number}', [UserController::class, 'createUsers']);
 });
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
