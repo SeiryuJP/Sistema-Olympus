@@ -3,6 +3,8 @@ import '../styles/styles.scss'
 
 // Import all of Bootstrap JS
 import * as bootstrap from 'bootstrap'
-import { init } from '../js/listaUsuarios-html';
+
+import { init, initFate } from './atributos'
 
 init();
+initFate();
