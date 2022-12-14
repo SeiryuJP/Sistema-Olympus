@@ -1,12 +1,12 @@
-import {conseguirHumanosAsignados} from './crud_usuarios'
+import {conseguirHumanosDios} from './crud_usuarios'
 import { Usuario } from './classes/Usuario';
 import { listUsuarios } from './listadoUsuarios';
 
 const divListaUsuarios = document.querySelector('.contenedor-tabla-usuarios');
 
-export const init = async() => {
+export const inicio = async() => {
     let usuario = JSON.parse(localStorage.getItem('user'));
-    const usuarios = await conseguirHumanosAsignados(usuario.id);
+    const usuarios = await conseguirHumanosDios(usuario.id);
     usuarios.forEach(crearUsuario);
 }
 

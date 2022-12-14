@@ -3,8 +3,8 @@ import '../styles/styles.scss'
 
 // Import all of Bootstrap JS
 import * as bootstrap from 'bootstrap'
-import { init } from '../js/listaUsuarios-html';
+import { inicio } from '../js/listaUsuarios-html';
 import {ListUsuario} from './classes/ListaUsuario'
 
-init();
+inicio();
 export let listUsuarios = new ListUsuario();

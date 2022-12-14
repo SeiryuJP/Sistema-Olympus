@@ -16,7 +16,8 @@ use App\Models\UsuariosAsignados;
 
 class AsignarController extends Controller
 {
-    public function getUsuariosProtegidos($id) {
+
+    public function getUsuariosDios($id) {
         $usuarios = HumanData::select('ID')->where('protection',$id)->get();
         $user = User::with(['humanosProtegidos'])
         ->whereIn('id', $usuarios)
@@ -24,14 +25,25 @@ class AsignarController extends Controller
         return response()->json($user,200);
     }
 
+    public function getUsuariosProtegidos($id, $idprueba) {
+        $usuarios = HumanData::select('ID')->where('protection',$id)->get();
+        $iduser = UsuariosAsignados::select('idusuario')->where('idprueba', $idprueba)->get();
+        $user = User::with(['humanosProtegidos'])
+        ->whereIn('id', $usuarios)
+        ->whereNotIn('id',$iduser)
+        ->get();
+        return response()->json($user,200);
+    }
+
 
     public function getUsuariosAfines($id,$idprueba){
         $vecUsuarios = [];
+        $iduser = UsuariosAsignados::select('idusuario')->where('idprueba', $idprueba)->get();
         $idUsuarios = AsignarController::humanosAfines($idprueba, $id);
         foreach ($idUsuarios as $idUser){
             try{
                 $usuario = HumanData::select('id')->where('protection',$id)->where('ID', $idUser->userID)->first();
-                $datosUsuario = User::select('*')->where('id',$usuario->id)->get();
+                $datosUsuario = User::select('*')->where('id',$usuario->id)->whereNotIn('id',$iduser)->get();
                 array_push($vecUsuarios, $datosUsuario);
             }catch(\Exception $e){
 
@@ -73,11 +85,24 @@ class AsignarController extends Controller
     }
 
     public function insertarUsuariosAsignados(Request $req){
-        $datos = [
-            'idprueba' => $req->idprueba,
-            'idusuario' => $req->idusuario,
-        ];
+        UsuariosAsignados::where('idprueba',$req->idprueba)->delete();
+       $usuarios = $req->idusuario;
+        print_r ($usuarios);
 
-        $libre = UsuariosAsignados::create($datos);
+        foreach ($usuarios as &$user) {
+            $datos = [
+                'idprueba' => $req->idprueba,
+                'idusuario' => $user,
+            ];
+            UsuariosAsignados::create($datos);
+        }
+    }
+
+    public function getUsuariosAsignados($idprueba){
+        $iduser = UsuariosAsignados::select('idusuario')->where('idprueba', $idprueba)->get();
+        $users = User::select('*')
+        ->whereIn('id', $iduser)
+        ->get();
+        return response()->json($users,200);
     }
 }

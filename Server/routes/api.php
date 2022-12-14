@@ -43,11 +43,15 @@ Route::middleware('auth:sanctum')->prefix('prueba')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('asignar')->group(function () {
 
-    Route::get('listar/usuarioasignado/{id}', [AsignarController::class,'getUsuariosProtegidos']);
+    Route::get('listar/usuariosdios/{id}', [AsignarController::class,'getUsuariosDios']);
+
+    Route::get('listar/usuarioprotegido/{id}/{idprueba}', [AsignarController::class,'getUsuariosProtegidos']);
 
     Route::get('listar/usuarioafin/{id}/{idprueba}', [AsignarController::class,'getUsuariosAfines']);
 
     Route::post('asignarprueba', [AsignarController::class,'insertarUsuariosAsignados']);
+
+    Route::get('listar/usuariosasignados/{idprueba}', [AsignarController::class,'getUsuariosAsignados']);
 });
 
 Route::prefix('user')->group(function () {
