@@ -1,6 +1,6 @@
 @use "sass:map";
 @import "~bootstrap/scss/bootstrap";
-@import "animation", 'tabla', 'pruebas'; 
+@import "animation", 'tabla', 'pruebas', 'registro', 'modalRegistro'; 
 
 $tema:(
     "colorPrimario": linear-gradient(to bottom right,  #ab5cf9, #baefe5),
@@ -25,40 +25,9 @@ $tema:(
 
 @include tabla($tema);
 @include pruebas($tema);
+@include registro($tema);
+@include modalRegistro();
 
-
-/**************************ESTILO LOGIN Y REGISTRO**************************************/
-.btn-signUp{
-    border-radius: 4vh;
-    border: 0;
-    margin-top: 2vh;
-    text-align: center; 
-    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-}
-
-.cabecera{
-    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-    color: #fff;
-}
-
-.navbar{
-    justify-content: center;
-}
-
-footer{
-    padding: 1vh;
-    text-align: center;
-    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-    color: #fff;
-}
-
-.contenedorRegistro{
-    background: linear-gradient(to bottom right,  #ab5cf9, #baefe5);
-    color: #fff;
-    .signUp{
-        background-color: #fff;
-        .area-texto{
-            background: rgba(255, 255, 255, 0.703);
-        }
-    }
+.volver {
+    width: 10%;
 }

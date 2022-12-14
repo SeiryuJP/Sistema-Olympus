@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap w/ Webpack</title>
+    <title>Sistema Olympus</title>
   </head>
   <body>
     <nav class="navbar cabecera">
+      <img src="../assets/img/logo_olimpus.png">
       <h2><a class="nav-link" href="../index.html">Sistema Olympus</a></h2>
+      <div></div>
     </nav>
-    <div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="vh-100 d-flex justify-content-center align-items-center formulario">
         <div class="col-md-4 shadow-sm border rounded-3">
           <div class="p-5 border rounded-3 contenedorRegistro">
             <h2 class="text-center mb-4">LOG IN</h2>
@@ -19,24 +21,21 @@
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control area-texto email" name="email" required
                 pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$">
-                <!-- <span class="error-email" aria-live="polite"></span> -->
             </div>
             <div class="mb-4">
-                <label class="form-label">Password</label>
+                <label class="form-label">Contraseña</label>
                 <input type="password" class="form-control area-texto password"name="password" required>
-                <!-- <span class="error-password" aria-live="polite"></span> -->
             </div>
-            <div class="mb-4 d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary btn-signUp" type="submit">Login</button>
+            <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
+                <button class="btn btn-primary btn-lg" type="submit">Login</button>
             </div>
             <div class="mt-3">
-                <p class="mb-4  text-center">No tienes cuenta? <a href="./html/registro.html" class="text-primary">Registrar</a></p>
-                <p class="mb-4  text-center"><a href="./html/listadoUsuarios.html" class="text-primary">Listado de usuarios </a></p>
+                <p class="mb-4 text-center">No tienes cuenta? <a href="./html/registro.html" class="text-primary">Registrar</a></p>
             </div>
           </form>
         </div>
     </div>
-    <footer>
+    <footer class="fixed-bottom">
       <span>© Copyright - 2022 | Khattari - Miriam</span>
     </footer>
   </body>
