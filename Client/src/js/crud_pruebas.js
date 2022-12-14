@@ -29,7 +29,6 @@ export const borrarPrueba = async(id) => {
             'Authorization': `Bearer ${token}`
         }   
     });
-    return await resp.json();
 }
 
 const crearPruebaEleccion = async(prueba) => {

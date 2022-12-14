@@ -136,10 +136,12 @@ const crearFilaUsuario = (usuario) =>{
 const cerrarModal = () =>{
     const btnCerrar = document.querySelector('.btn-cerrar');
     const btnAceptar = document.querySelector('.btn-aceptar');
+    const divPadreModal = divModal.parentElement;
     btnCerrar.addEventListener('click', () => {
         limpiarModal();
         modal.style.display = "none";
         divModal.innerHTML = '';
+        divPadreModal.removeAttribute("style");
     });
     btnAceptar.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -157,7 +159,9 @@ const cerrarModal = () =>{
         modal.style.display = "none";
         idUsuarios = [];
         divModal.innerHTML = '';
+        divPadreModal.removeAttribute("style");
     });
+    
 } 
 
 

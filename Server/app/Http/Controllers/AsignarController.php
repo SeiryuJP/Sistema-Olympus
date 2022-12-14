@@ -17,7 +17,7 @@ use App\Models\UsuariosAsignados;
 class AsignarController extends Controller
 {
     public function getUsuariosProtegidos($id) {
-        $usuarios = HumanData::select('id')->where('protection',$id)->get();
+        $usuarios = HumanData::select('ID')->where('protection',$id)->get();
         $user = User::with(['humanosProtegidos'])
         ->whereIn('id', $usuarios)
         ->get();

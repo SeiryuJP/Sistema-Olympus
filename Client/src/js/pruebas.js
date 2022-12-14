@@ -71,11 +71,9 @@ export const nombreDios = (id) => {
 }
 
 export const eliminarPrueba = () => {
-    const infoEliminar = document.querySelector('.info-eliminar');
     const borrar = document.querySelectorAll('.delete');
     borrar.forEach(boton => {
         boton.addEventListener('click', () => {
-            infoEliminar.textContent = ''; 
             let origen = boton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
             modal.style.display = "block";
             crearModalBorrar(origen)
@@ -92,16 +90,6 @@ export const asignarPrueba = () => {
             crearModalAsignar(origen)
         });
     });  
-}
-
-
-
-
-const confirmarEliminarPrueba = async(id) =>{
-    const infoEliminar = document.querySelector('.info-eliminar');
-    let mensajeBorrar = await borrarPrueba(id);
-    infoEliminar.textContent = mensajeBorrar;  
-    infoEliminar.style.padding = "0.4rem 1rem";  
 }
 
 const crearModalBorrar = (origen) => {
@@ -134,7 +122,7 @@ const cerrarModal = (origen) =>{
         let id = origen.id.slice(1);
         listPruebas.eliminarPrueba(id);
         origen.remove();
-        confirmarEliminarPrueba(id);
+        borrarPrueba(id);
         modal.style.display = "none";
         divModal.innerHTML = '';
     });
