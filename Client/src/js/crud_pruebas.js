@@ -4,6 +4,7 @@ const urlCrearPuntual = 'http://127.0.0.1:8000/api/prueba/puntual/crear';
 const urlCrearRespLibre = 'http://127.0.0.1:8000/api/prueba/resplibre/crear';
 const urlListPruebas = 'http://127.0.0.1:8000/api/prueba/listar';
 const urlBorrarPrueba = 'http://127.0.0.1:8000/api/prueba/borrar';
+const urlAsignarPrueba = 'http://127.0.0.1:8000/api/asignar/asignarprueba';
 
 let datos = JSON.parse(localStorage.getItem('user'));
 let token = datos.token;
@@ -28,7 +29,6 @@ export const borrarPrueba = async(id) => {
             'Authorization': `Bearer ${token}`
         }   
     });
-    return await resp.json();
 }
 
 const crearPruebaEleccion = async(prueba) => {
@@ -77,6 +77,18 @@ const crearPruebaRespuestaLibre = async(prueba) => {
         }
     });
     return await resp.json();
+}
+
+export const insertarUsuariosAsignados = async(idusuario, idprueba) =>{
+
+    const resp = await fetch(urlAsignarPrueba, {
+        method: 'POST',
+        body: JSON.stringify({idusuario:idusuario, idprueba:idprueba}),
+        headers: {
+            'Content-Type': 'application/json' ,
+            'Authorization': `Bearer ${token}`
+        }
+    });
 }
 
 export {

@@ -14,4 +14,8 @@ class HumanData extends Model
         'fate',
         'protection',
     ];
+
+    public function usuario(){
+        return $this->hasMany('App\Models\User', 'ID', 'id');
+    }
 }

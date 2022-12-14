@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\midDios;
+use App\Http\Controllers\AsignarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,15 @@ Route::middleware('auth:sanctum')->prefix('prueba')->group(function () {
 
     Route::delete('borrar/{id}', [PruebaController::class,'deletePrueba'])->middleware(['midDios']);
 
+});
+
+Route::middleware('auth:sanctum')->prefix('asignar')->group(function () {
+
+    Route::get('listar/usuarioasignado/{id}', [AsignarController::class,'getUsuariosProtegidos']);
+
+    Route::get('listar/usuarioafin/{id}/{idprueba}', [AsignarController::class,'getUsuariosAfines']);
+
+    Route::post('asignarprueba', [AsignarController::class,'insertarUsuariosAsignados']);
 });
 
 Route::prefix('user')->group(function () {
