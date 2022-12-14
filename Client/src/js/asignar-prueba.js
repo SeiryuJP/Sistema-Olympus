@@ -1,7 +1,7 @@
 import { Usuario } from './classes/Usuario';
 import { divModal,modal } from "./pruebas";
 import {listPruebas} from './indexListado';
-import {listUsuarios} from './indexListado';
+import {listUsuarios} from './listadoUsuarios';
 import { nombreDios } from "./pruebas";
 import { conseguirHumanosAfines, conseguirHumanosAsignados } from './crud_usuarios';
 import { insertarUsuariosAsignados } from './crud_pruebas';
