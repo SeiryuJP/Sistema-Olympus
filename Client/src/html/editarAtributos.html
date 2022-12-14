@@ -23,23 +23,28 @@
                 <form class="p-5" id="registro">
                   <div class="mb-4">
                     <label class="form-label">Sabiduria</label>
-                    <input type="range" class="form-range min="0" max="5"" id="sabiduria" name="sabiduria">
+                    <input type="range" value="3" class="form-range min="0" max="5"" id="sabiduria" name="sabiduria" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Nobleza</label>
-                    <input type="range" class="form-range min="1" max="5"" id="nobleza" name="nobleza">
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="nobleza" name="nobleza" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Virtud</label>
-                    <input type="range" class="form-range min="1" max="5"" id="virtud" name="virtud">
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="virtud" name="virtud" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Maldad</label>
-                    <input type="range" class="form-range min="1" max="5"" id="maldad" name="maldad">
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="maldad" name="maldad" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Audacia</label>
-                    <input type="range" class="form-range min="1" max="5"" id="audacia" name="audacia">
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="audacia" name="audacia" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
                       <button class="btn btn-primary" type="submit" id="goAttributes">Cambiar atributos</button>

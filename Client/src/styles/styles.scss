@@ -1,6 +1,7 @@
 @use "sass:map";
 @import "~bootstrap/scss/bootstrap";
-@import "animation", 'tabla', 'pruebas', 'registro', 'modalRegistro', 'cabecera', "contenedor"; 
+@import "animation", 'tabla', 'pruebas', 'registro'; 
+@import 'modalRegistro', 'cabecera', "contenedor", "range";
 
 $tema:(
     "colorPrimario": linear-gradient(to bottom right,  #ab5cf9, #baefe5),
@@ -29,6 +30,7 @@ $tema:(
 @include modalRegistro($tema);
 @include cabecera($tema);
 @include contenedor($tema);
+@include range($tema);
 
 .volver {
     width: 10%;

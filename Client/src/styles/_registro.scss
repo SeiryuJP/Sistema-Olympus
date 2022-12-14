@@ -1,6 +1,7 @@
 @mixin registro($tema) {
     body {   
         footer{
+            margin-top: 1vh;
             padding: 1vh;
             text-align: center;
             background: map.get($tema,"colorPrimario");
@@ -25,6 +26,19 @@
                 transition: all 0.5s;
                 @include zoom();
             }
+        }
+
+        .animado {
+            animation: div_animado 3s linear ;
+        }
+
+        @keyframes div_animado {
+            0% {transform: rotate(0deg);left:0px;}
+            25% {transform: rotate(20deg);left:0px;}
+            50% {transform: rotate(0deg);left:500px;}
+            55% {transform: rotate(0deg);left:500px;}
+            70% {transform: rotate(0deg);left:500px;}
+            100% {transform: rotate(-360deg);left:0px;}
         }
     }
 }
