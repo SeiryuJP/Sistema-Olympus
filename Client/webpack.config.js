@@ -132,7 +132,7 @@ module.exports = {
         detallesHumano: './src/js/detallesHumano.js',
         editarPerfilHumano: './src/js/editarPerfilHumano.js',
         editarPerfilDios: './src/js/editarPerfilDios.js',
-        editarPerfilAtributos: './src/js/editarPerfilDios.js'
+        editarPerfilAtributos: './src/js/updateAttribute.js'
     },
     plugins: [
         new MiniCssExtractPlugin({

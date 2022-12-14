@@ -32,8 +32,6 @@ class UserController extends Controller
                     ->update(['atributes_users.value' => $request->$name]);
             }
 
-        return response()->json(["success"=>true, "message" => "done"],200);
+        return response()->json(["success"=>true, "message" => "Attributes changed successfully"],200);
     }
 }
-// for name $atribute->atributos2[0]->name;
-// for value $atribute->value;

@@ -23,29 +23,35 @@
                 <form class="p-5" id="registro">
                   <div class="mb-4">
                     <label class="form-label">Sabiduria</label>
-                    <input type="range" class="form-range min="0" max="5"" id="customRange1">
+                    <input type="range" class="form-range min="0" max="5"" id="sabiduria" name="sabiduria">
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Nobleza</label>
-                    <input type="range" class="form-range min="0" max="5"" id="customRange2">
+                    <input type="range" class="form-range min="1" max="5"" id="nobleza" name="nobleza">
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Virtud</label>
-                    <input type="range" class="form-range min="0" max="5"" id="customRange3">
+                    <input type="range" class="form-range min="1" max="5"" id="virtud" name="virtud">
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Maldad</label>
-                    <input type="range" class="form-range min="0" max="5"" id="customRange4">
+                    <input type="range" class="form-range min="1" max="5"" id="maldad" name="maldad">
                   </div>
                   <div class="mb-4">
                     <label class="form-label">Audacia</label>
-                    <input type="range" class="form-range min="0" max="5"" id="customRange5">
+                    <input type="range" class="form-range min="1" max="5"" id="audacia" name="audacia">
                   </div>
                   <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
-                      <button class="btn btn-primary" type="button" id="goAttributes">Cambiar atributos</button>
+                      <button class="btn btn-primary" type="submit" id="goAttributes">Cambiar atributos</button>
                   </div>
                 </form>
               </div>
+          </div>
+          <div id="modalRegistro" class="modal">
+            <div class="modalContent">
+              <span class="close">×</span>
+              <p id="parrafo"></p>
+            </div>
           </div>
           <footer class="bottom">
             <span>© Copyright - 2022 | Khattari - Miriam</span>
