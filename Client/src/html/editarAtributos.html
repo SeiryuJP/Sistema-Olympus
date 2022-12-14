@@ -22,26 +22,41 @@
                 </div>
                 <form class="p-5" id="registro">
                   <div class="mb-4">
-                      <label class="form-label">Password</label>
-                      <input type="password" class="form-control area-texto password" name="password" required>
-                      <span class="error_password"></span>
+                    <label class="form-label">Sabiduria</label>
+                    <input type="range" value="3" class="form-range min="0" max="5"" id="sabiduria" name="sabiduria" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
-                      <label class="form-label">New password</label>
-                      <input type="password" class="form-control area-texto password" name="password" required>
-                      <span class="error_password"></span>
+                    <label class="form-label">Nobleza</label>
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="nobleza" name="nobleza" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
                   </div>
                   <div class="mb-4">
-                    <label class="form-label">Confirm new password</label>
-                    <input type="password" class="form-control area-texto confirm_password" name="confirm_password" required>
-                    <span class="error_confirm-password"></span>
-                </div>
+                    <label class="form-label">Virtud</label>
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="virtud" name="virtud" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Maldad</label>
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="maldad" name="maldad" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Audacia</label>
+                    <input type="range" value="3" class="form-range min="1" max="5"" id="audacia" name="audacia" oninput="this.nextElementSibling.value = this.value">
+                    <output>3</output>
+                  </div>
                   <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
-                      <button class="btn btn-primary" type="submit">Actualizar perfil</button>
-                      <button class="btn btn-primary" type="button" id="goAttributes">Cambiar atributos</button>
+                      <button class="btn btn-primary" type="submit" id="goAttributes">Cambiar atributos</button>
                   </div>
                 </form>
               </div>
+          </div>
+          <div id="modalRegistro" class="modal">
+            <div class="modalContent">
+              <span class="close">×</span>
+              <p id="parrafo"></p>
+            </div>
           </div>
           <footer class="bottom">
             <span>© Copyright - 2022 | Khattari - Miriam</span>

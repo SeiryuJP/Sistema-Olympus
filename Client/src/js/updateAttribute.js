@@ -4,7 +4,6 @@ import '../styles/styles.scss'
 // Import all of Bootstrap JS
 import * as bootstrap from 'bootstrap'
 
-import { initUpdatePass, initUpdateAttributes } from './validation'
+import { initUpdateAttributes } from './validation'
 
-initUpdatePass();
 initUpdateAttributes();

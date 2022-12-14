@@ -1,5 +1,4 @@
-import { registrar } from "./http-provider";
-import { updatePassword } from "./http-provider";
+import { registrar, updatePassword, updateAttributes } from "./http-provider";
 
 const name = document.querySelector('.name');
 const email = document.querySelector('.email');
@@ -18,6 +17,10 @@ export const inicializar = () => {
 
 export const initUpdatePass = () => {
     validUpdate();
+}
+
+export const initUpdateAttributes = () => {
+    updateAttr();
 }
 
 const validation = () => {
@@ -88,4 +91,26 @@ const validUpdate = () => {
         event.preventDefault();
     }
 });
+}
+
+const updateAttr = () => {
+    form.addEventListener('submit', (event) => {
+        const data = new FormData(document.getElementById('registro'));
+        const newAttributes = Object.fromEntries(data);
+        const locale = JSON.parse(localStorage.getItem('user'));
+        newAttributes['id'] = locale.id;
+        updateAttributes(newAttributes).then(result => {
+            const modal = document.getElementById('modalRegistro');
+            const parrafo = document.getElementById('parrafo');
+            const close = document.getElementsByClassName('close')[0];
+            if (result.success === true){
+                parrafo.innerHTML = 'Atributos actualizados correctamente';
+                modal.style.display = 'block';
+                close.addEventListener('click', (event) => {
+                    modal.style.display = "none";
+                }); 
+            }
+        });
+        event.preventDefault()
+    });
 }

@@ -3,6 +3,7 @@ const urlLogin = 'http://127.0.0.1:8000/api/login';
 const urlLogOut = 'http://127.0.0.1:8000/api/logout';
 const urlUsers = 'http://127.0.0.1:8000/api/user/users';
 const urlUpdatePassword = 'http://127.0.0.1:8000/api/user/update';
+const urlUpdateAttributes = 'http://127.0.0.1:8000/api/user/updateattributes'
 
 export const registrar = async (usuario) => {
     const response = await fetch(urlRegister, {
@@ -51,6 +52,17 @@ export const logOut = async (usuario) => {
 
 export const updatePassword = async (data) => {
     const response = await fetch(urlUpdatePassword, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
+}
+
+export const updateAttributes = async (data) => {
+    const response = await fetch(urlUpdateAttributes, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
