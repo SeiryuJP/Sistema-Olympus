@@ -16,6 +16,6 @@ class UserController extends Controller
     public function updateUser(Request $request) {
         $user = User::find($request->id)->update(['password' => bcrypt($request->newPassword)]);
 
-        return response()->json($user,200);
+        return response()->json(["success"=>true, "message" => "Password changed correctly"],200);
     }
 }

@@ -56,8 +56,16 @@ const filesHTML = [
         chunks: ['detallesHumano']
     },
     {
-        filename: './html/editarPerfil.html',
-        chunks: ['editarPerfil']
+        filename: './html/editarPerfilHumano.html',
+        chunks: ['editarPerfilHumano']
+    },
+    {
+        filename: './html/editarPerfilDios.html',
+        chunks: ['editarPerfilDios']
+    },
+    {
+        filename: './html/editarAtributos.html',
+        chunks: ['editarPerfilAtributos']
     },
 ]
 
@@ -122,7 +130,9 @@ module.exports = {
         perfilDios: './src/js/perfilDios.js',
         detallesDios: './src/js/detallesDios.js',
         detallesHumano: './src/js/detallesHumano.js',
-        editarPerfil: './src/js/editarPerfil.js'
+        editarPerfilHumano: './src/js/editarPerfilHumano.js',
+        editarPerfilDios: './src/js/editarPerfilDios.js',
+        editarPerfilAtributos: './src/js/editarPerfilDios.js'
     },
     plugins: [
         new MiniCssExtractPlugin({

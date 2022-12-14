@@ -42,10 +42,10 @@ Route::middleware('auth:sanctum')->prefix('prueba')->group(function () {
 
 Route::prefix('user')->group(function () {
     // Route::get('users', [UserController::class, 'allUsers'])->middleware(['midDios'])->middleware(['cors']);
-    Route::put('update', [UserController::class, 'updateUser']);
+    Route::put('update', [UserController::class, 'updateUser'])->middleware(['cors']);
 });
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);
 Route::post('login', [AuthController::class, 'login'])->middleware(['cors']);
-Route::post('logout', [AuthController::class, 'logout']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware(['cors']);
 Route::get('verification', [VerificationController::class, 'verificateMail']);
