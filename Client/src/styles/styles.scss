@@ -26,7 +26,7 @@ $tema:(
 @include tabla($tema);
 @include pruebas($tema);
 @include registro($tema);
-@include modalRegistro();
+@include modalRegistro($tema);
 @include cabecera($tema);
 @include contenedor($tema);
 

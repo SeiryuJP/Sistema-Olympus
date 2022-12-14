@@ -17,4 +17,22 @@
         justify-content: center;
         text-align: center;
     }
+    .btn-volver{
+        .volver{
+            background: map.get($tema,"colorSecundario");
+            border-radius: 5vh;
+            border: none;
+            width: 12%;
+            font-size: map-get($tema, "texto");
+            padding: 1vh;
+            color: white;
+            font-weight: map.get($tema,"pesoMedium");
+            margin: 3vh 4%;
+            &:hover{
+                background: map.get($tema,"colorPrimario");
+                transition: all 0.5s;
+                @include zoom();
+            }
+        }
+    }
 }
