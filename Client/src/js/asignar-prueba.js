@@ -66,9 +66,11 @@ export const crearModalAsignar = (origen) => {
     let dios = nombreDios(prueba.iddios);
     div.innerHTML = modal(prueba, dios);
     divModal.appendChild(div);
-    obtenerHumanos("Todos", prueba.iddios, prueba.id);
+    const data = JSON.parse(localStorage.getItem('user'));
+    const iddios = data.id; 
+    obtenerHumanos("Todos", iddios, prueba.id);
     obtenerUsuariosAsignados(prueba.id);
-    addEventos(prueba.iddios, prueba.id);
+    addEventos(iddios, prueba.id);
     cerrarModal();
 }
 

@@ -3,6 +3,8 @@ import { login } from "./http-provider";
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
 const form = document.getElementsByTagName('form')[0];
+const emailError = document.querySelector('.erroremail');
+const passwordError = document.querySelector('.errorpassword');
 
 export const inicializar = () =>{
     validation();
@@ -10,10 +12,13 @@ export const inicializar = () =>{
 
 const validation = () => {
     form.addEventListener('submit', (event) => {
+        limpiarErrorLogin();
             if(!email.validity.valid){
+                mostrarErrorLogin();
                 event.preventDefault();
             }
             if(!password.validity.valid){
+                mostrarErrorLogin();
                 event.preventDefault();
             }else{
             const data = new FormData(document.getElementById('login'));
@@ -49,4 +54,18 @@ const validation = () => {
             event.preventDefault();
         }
     });
+
+    const mostrarErrorLogin = () =>{
+        if(email.validity.valueMissing || email.validity.patternMismatch){
+            emailError.textContent = 'Introduzca el email correctamente';
+        }
+        if(password.validity.valueMissing){
+            passwordError.textContent = 'Introduzca una contraseña';
+        }
+    }
+
+    const limpiarErrorLogin = () => {
+        emailError.textContent = '';
+        passwordError.textContent = '';
+    }
 }

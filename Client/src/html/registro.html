@@ -18,28 +18,28 @@
           <div class="p-5 border rounded-3 contenedorRegistro">
             <h2 class="text-center mb-4">SIGN UP</h2>
           </div>
-          <form class="p-5" id="registro">
+          <form class="p-5" id="registro" novalidate>
             <div class="mb-4">
               <label class="form-label">Nombre</label>
               <input type="form-label" class="form-control area-texto name" name="name" required
-              pattern="^[a-zA-Z]*$">
-              <span class="error_name"></span>
+              pattern="^[a-zA-Z0-9]*$">
+              <span class="error_name text-danger"></span>
           </div>
             <div class="mb-4">
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control area-texto email" name="email" required
                 pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$">
-                <span class="error_email"></span>
+                <span class="error_email text-danger"></span>
             </div>
             <div class="mb-4">
                 <label class="form-label">Contraseña</label>
                 <input type="password" class="form-control area-texto password" name="password" required>
-                <span class="error_password"></span>
+                <span class="error_password text-danger"></span>
             </div>
             <div class="mb-4">
               <label class="form-label">Confirmar Contraseña</label>
               <input type="password" class="form-control area-texto confirm_password" name="confirm_password" required>
-              <span class="error_confirm-password"></span>
+              <span class="error_confirm-password text-danger"></span>
           </div>
             <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
                 <button class="btn btn-primary" type="submit">Sign Up</button>
