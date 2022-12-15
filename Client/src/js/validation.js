@@ -72,7 +72,6 @@ const validUpdate = () => {
         const data = new FormData(document.getElementById('registro'));
         const update = Object.fromEntries(data);
         update['id'] = locale.id;
-        console.log(update);
         updatePassword(update).then(result => {
             const modal = document.getElementById('modalRegistro');
             const parrafo = document.getElementById('parrafo');

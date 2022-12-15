@@ -19,7 +19,6 @@ const validation = () => {
             const data = new FormData(document.getElementById('login'));
             const usuario = Object.fromEntries(data);
             login(usuario).then(result => {
-                console.log(result);
                 if (result.message === 'Logged in!') {
                     const role = result.data['role'];
                     if (result.success === true && role === 'human'){

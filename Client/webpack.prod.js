@@ -64,7 +64,6 @@ module.exports = {
        
         new HtmlWebPackPlugin({
             title: 'Mi Webpack App',
-            //filename: 'index.html',
             template: './src/index.html'
         }),
         new MiniCssExtractPlugin({
