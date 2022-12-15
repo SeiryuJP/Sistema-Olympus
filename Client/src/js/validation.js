@@ -25,10 +25,21 @@ export const initUpdateAttributes = () => {
 
 const validation = () => {
     form.addEventListener('submit', (event) => {
+        limpiarErrorRegistro();
+            if(!name.validity.valid){
+                mostrarErrorRegistro();
+                event.preventDefault();
+            }
             if(!email.validity.valid){
+                mostrarErrorRegistro();
                 event.preventDefault();
             }
             if(!password.validity.valid){
+                mostrarErrorRegistro();
+                event.preventDefault();
+            }
+            if(!confirm_password.validity.valid){
+                mostrarErrorRegistro();
                 event.preventDefault();
             }else{
             const data = new FormData(document.getElementById('registro'));
@@ -61,6 +72,28 @@ const validation = () => {
             event.preventDefault();
         }
     });
+
+    const mostrarErrorRegistro = () =>{
+        if(name.validity.valueMissing){
+            error_name.textContent = 'Introduzca un nombre de usuario';
+        }
+        if(email.validity.valueMissing || email.validity.patternMismatch){
+            error_email.textContent = 'Introduzca el email correctamente';
+        }
+        if(password.validity.valueMissing){
+            error_password.textContent = 'Introduzca una contraseña';
+        }
+        if(confirm_password.validity.valueMissing){
+            error_confirm_password.textContent = 'Introduzca la confirmación de contraseña';
+        }
+    }
+
+    const limpiarErrorRegistro = () => {
+        error_name.textContent = '';
+        error_email.textContent = '';
+        error_password.textContent = '';
+        error_confirm_password.textContent ='';
+    }
 }
 
 const validUpdate = () => {
@@ -113,3 +146,4 @@ const updateAttr = () => {
         event.preventDefault()
     });
 }
+
