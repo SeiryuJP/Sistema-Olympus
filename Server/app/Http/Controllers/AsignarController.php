@@ -87,8 +87,6 @@ class AsignarController extends Controller
     public function insertarUsuariosAsignados(Request $req){
         UsuariosAsignados::where('idprueba',$req->idprueba)->delete();
        $usuarios = $req->idusuario;
-        print_r ($usuarios);
-
         foreach ($usuarios as &$user) {
             $datos = [
                 'idprueba' => $req->idprueba,

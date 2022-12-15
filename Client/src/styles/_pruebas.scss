@@ -15,6 +15,10 @@
             }
             .activa{
                 background: map.get($tema,"colorPrimario");
+                &:hover{
+                    transition: all 0.5s;
+                    transform: skewX(10deg);
+                }   
             }
             p{
                 font-weight: map.get($tema,"pesoLight");
@@ -56,6 +60,7 @@
                 background: map.get($tema,"colorPrimario");
                 transition: all 0.5s;
                 @include zoom();
+                transform: skewX(30deg);
             }
             span{
                 font-size: map-get($tema, "error");
