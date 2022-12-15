@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\AtributesUsers;
+use App\Models\HumanData;
 
 class UserController extends Controller
 {
@@ -33,5 +34,42 @@ class UserController extends Controller
             }
 
         return response()->json(["success"=>true, "message" => "Attributes changed successfully"],200);
+    }
+
+    public function createUsers(Request $request) {
+        $quantity = $request->number;
+        $counter = 0;
+        while ($counter < $quantity){
+            $userData = [
+                'name' => fake()->name(),
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => bcrypt('1234'), // password
+                'role' => 'human',
+            ];
+    
+            $user = User::create($userData);
+    
+            $dataH = [
+                'ID' => $user->id,
+                'fate' => 0,
+                'protection' => $request->id
+            ];
+            HumanData::create($dataH);
+            $cont = 1;
+            while ($cont <= 5) {
+                $dataA = [
+                    'atributeID' => $cont,
+                    'userID' => $user->id,
+                    'value' => rand(1, 5),
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+                AtributesUsers::create($dataA);
+                $cont++;
+            }
+            $counter++;
+        }
+        return response()->json(["success"=>true, "message" => "Users created successfully"],200);
     }
 }

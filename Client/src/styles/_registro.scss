@@ -35,10 +35,7 @@
         @keyframes div_animado {
             0% {transform: rotate(0deg);left:0px;}
             25% {transform: rotate(20deg);left:0px;}
-            50% {transform: rotate(0deg);left:500px;}
-            55% {transform: rotate(-20deg);left:500px;}
-            70% {transform: rotate(0deg);left:500px;}
-            100% {transform: rotate(0deg);left:500px;}
+            50% {transform: rotate(0deg);left:0px;}
         }
     }
 }

@@ -67,6 +67,10 @@ const filesHTML = [
         filename: './html/editarAtributos.html',
         chunks: ['editarPerfilAtributos']
     },
+    {
+        filename: './html/generarUsuarios.html',
+        chunks: ['generarUsuarios']
+    },
 ]
 
 module.exports = {
@@ -132,7 +136,8 @@ module.exports = {
         detallesHumano: './src/js/detallesHumano.js',
         editarPerfilHumano: './src/js/editarPerfilHumano.js',
         editarPerfilDios: './src/js/editarPerfilDios.js',
-        editarPerfilAtributos: './src/js/updateAttribute.js'
+        editarPerfilAtributos: './src/js/updateAttribute.js',
+        generarUsuarios: './src/js/generarUsuarios.js'
     },
     plugins: [
         new MiniCssExtractPlugin({
