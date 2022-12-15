@@ -47,7 +47,7 @@ Desplegar con el servidor de desarrollo:
 
 Crear una base de datos llamada def <br>
 Importar el archivo def.sql en el administrador de MySQL (phpMyAdmin) <br>
-El archivo se encuentra dentro de la carpeta Server
+El archivo se incluye en el .zip
 
 ## Credenciales
 
