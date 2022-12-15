@@ -80,7 +80,6 @@ const crearPruebaRespuestaLibre = async(prueba) => {
 }
 
 export const insertarUsuariosAsignados = async(idusuario, idprueba) =>{
-    let usuarios = JSON.stringify({idusuario:idusuario, idprueba:idprueba});
     const resp = await fetch(urlAsignarPrueba, {
         method: 'POST',
         body: JSON.stringify({idusuario:idusuario, idprueba:idprueba}),

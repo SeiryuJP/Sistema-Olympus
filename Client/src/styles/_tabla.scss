@@ -62,12 +62,24 @@
                                     color: map-get($tema, "colorBaseHover");
                                     transition: all 0.5s;
                                     @include zoom();
+                                    @include rotar();
                                 }
                             }
                         }
                         
                     }
                 } 
+            }
+            .contenedor-tabla-usuarios{
+                .card-body{
+                    &:hover{
+                        .fa-user{
+                            @include color();
+                            transition: 0.5s all;
+                            font-size: map-get($tema, "iconos");
+                        }
+                    }
+                }
             }
             .contenedor-tabla::-webkit-scrollbar, .contenedor-tabla-usuarios::-webkit-scrollbar {
                 width: 8px;
