@@ -58,6 +58,7 @@ Route::prefix('user')->group(function () {
     Route::put('update', [UserController::class, 'updateUser'])->middleware(['cors']);
     Route::put('updateattributes', [UserController::class, 'updateAttributes']);
     Route::get('create/{id}/{number}', [UserController::class, 'createUsers']);
+    Route::get('getattributes/{id}', [UserController::class, 'getAttributes']);
 });
 
 Route::post('register', [AuthController::class, 'register'])->middleware(['cors']);

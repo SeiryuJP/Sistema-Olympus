@@ -1,12 +1,17 @@
+import { getAttributes } from "./http-provider";
+
 const data = JSON.parse(localStorage.getItem('user'));
-const attributes = data.attributes;
+const id = data.id;
 const fate = data.fate;
 const fateP = document.querySelector('.fate');
 
 let tBody = document.querySelector('tbody');
 
 export const init = () => {
-    crearFilaAtributos(attributes);
+    getAttributes(id).then(result => {
+        console.log(result.attributes);
+        crearFilaAtributos(result.attributes);
+    })
 }
 
 export const initFate = () => {

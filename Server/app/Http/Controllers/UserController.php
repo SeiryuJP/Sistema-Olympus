@@ -72,4 +72,16 @@ class UserController extends Controller
         }
         return response()->json(["success"=>true, "message" => "Users created successfully"],200);
     }
+
+    public function getAttributes(Request $request) {
+        $atribute = AtributesUsers::with(['atributos2'])->where('userID', $request->id)->get();
+        $atributes = [];
+        foreach ($atribute as $atr) {
+            array_push($atributes, [
+                "name" => $atr->atributos2[0]->name,
+                "value" => $atr->value
+            ]);
+        }
+        return response()->json(["success"=>true, "attributes" => $atributes],200);
+    }
 }

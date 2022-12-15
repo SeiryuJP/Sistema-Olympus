@@ -5,6 +5,7 @@ const urlUsers = 'http://127.0.0.1:8000/api/user/users';
 const urlUpdatePassword = 'http://127.0.0.1:8000/api/user/update';
 const urlUpdateAttributes = 'http://127.0.0.1:8000/api/user/updateattributes';
 const urlGenerateUsers = 'http://127.0.0.1:8000/api/user/create';
+const urlGetAttributes = 'http://127.0.0.1:8000/api/user/getattributes';
 
 export const registrar = async (usuario) => {
     const response = await fetch(urlRegister, {
@@ -76,6 +77,17 @@ export const updateAttributes = async (data) => {
 export const generateUsers = async (data) => {
     try {
         const response = await fetch(urlGenerateUsers+'/'+data.id+'/'+data.number);
+        if (!response.ok) throw ('No se pudo realizar la peticion');
+        return await response.json();
+    }
+    catch(err) {
+        throw err;
+    }
+}
+
+export const getAttributes = async (id) => {
+    try {
+        const response = await fetch(urlGetAttributes+'/'+id);
         if (!response.ok) throw ('No se pudo realizar la peticion');
         return await response.json();
     }
