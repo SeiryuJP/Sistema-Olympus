@@ -1,9 +1,8 @@
 import { Usuario } from './classes/Usuario';
 import { divModal,modal } from "./pruebas";
 import {listPruebas} from './indexListado';
-import {listUsuarios} from './listadoUsuarios';
 import { nombreDios } from "./pruebas";
-import { conseguirHumanosAfines, conseguirHumanosAsignados } from './crud_usuarios';
+import { conseguirHumanosAfines, conseguirHumanosAsignados, conseguirHumanosProtegidos } from './crud_usuarios';
 import { insertarUsuariosAsignados } from './crud_pruebas';
 import {addEventosDrop, drag} from './dragDrop';
 
@@ -68,8 +67,17 @@ export const crearModalAsignar = (origen) => {
     div.innerHTML = modal(prueba, dios);
     divModal.appendChild(div);
     obtenerHumanos("Todos", prueba.iddios, prueba.id);
+    obtenerUsuariosAsignados(prueba.id);
     addEventos(prueba.iddios, prueba.id);
     cerrarModal();
+}
+
+const obtenerUsuariosAsignados = async(idprueba) =>{
+    let divCandidatos = document.querySelector('.lista-candidatos');
+    divCandidatos.innerHTML='';
+    let usuariosAsignados = await conseguirHumanosAsignados(idprueba);
+    usuariosAsignados.forEach(crearFilaUsuarioAsignado);
+    addEventosDrop(divCandidatos);
 }
 
 const addEventos = (iddios, idprueba) =>{
@@ -81,32 +89,26 @@ const addEventos = (iddios, idprueba) =>{
 }
 
 const obtenerHumanos = async(opcion, iddios, idprueba) =>{
-    limpiarModal(); 
+    
+    let divUsuarios = document.querySelector('.lista-usuarios');
+    divUsuarios.innerHTML='';
 
     if(opcion == "Todos") {
-        let usuarios = await conseguirHumanosAsignados(iddios);
-        console.log(usuarios);
+        let usuarios = await conseguirHumanosProtegidos(iddios, idprueba);
         usuarios.forEach(crearUsuario);
     }
     else if(opcion == "Afín") {
         let usuarios = await conseguirHumanosAfines(iddios, idprueba);
-        console.log(usuarios);
         usuarios.forEach(elemento =>{
             elemento.forEach(crearUsuario);
         })
     }
-
-    let divUsuarios = document.querySelector('.lista-usuarios');
-    let divCandidatos = document.querySelector('.lista-candidatos');
-
     addEventosDrop(divUsuarios);
-    addEventosDrop(divCandidatos);
 }
 
 const crearUsuario = (usuario) =>{
     let newUsuario = new Usuario(usuario.id, usuario.name, usuario.email, usuario.avatar, usuario.role);
-    listUsuarios.nuevoUsuario(newUsuario);
-    crearFilaUsuario(usuario);
+    crearFilaUsuario(newUsuario);
 }
 
 const crearFilaUsuario = (usuario) =>{
@@ -119,7 +121,7 @@ const crearFilaUsuario = (usuario) =>{
                         <img>
                     </div>
                     <div class="col-10">
-                        <p><b>${usuario.name}</b></p>
+                        <p><b>${usuario.nombre}</b></p>
                         <p>${usuario.email}</p>
                     </div>
                 </div>
@@ -130,9 +132,9 @@ const crearFilaUsuario = (usuario) =>{
     div.innerHTML = fila (usuario);
     div.firstElementChild.setAttribute('draggable', true);
     drag(div.firstElementChild);
-    divUsuarios.appendChild(div);
-
+    divUsuarios.appendChild(div.firstElementChild);
 }
+
 
 const cerrarModal = () =>{
     const btnCerrar = document.querySelector('.btn-cerrar');
@@ -153,9 +155,7 @@ const cerrarModal = () =>{
         for (let i = 0; i < hijos.length; i++){
             idUsuarios.push(hijos[i].id.slice(1));
         }
-        for (let j = 0; j < idUsuarios.length; j++){
-            insertarUsuariosAsignados(idUsuarios[j], idPrueba);
-        }
+        insertarUsuariosAsignados(idUsuarios, idPrueba);
         limpiarModal();
         modal.style.display = "none";
         idUsuarios = [];
@@ -165,7 +165,29 @@ const cerrarModal = () =>{
     
 } 
 
-
+const crearFilaUsuarioAsignado = (usuario) =>{
+    let divCandidatos = document.querySelector('.lista-candidatos');
+    const fila = (usuario) => `
+        <div class="card mb-3" id="u${usuario.id}">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-2">
+                        <img>
+                    </div>
+                    <div class="col-10">
+                        <p><b>${usuario.name}</b></p>
+                        <p>${usuario.email}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    const div = document.createElement('div');
+    div.innerHTML = fila (usuario);
+    div.firstElementChild.setAttribute('draggable', true);
+    drag(div.firstElementChild);
+    divCandidatos.appendChild(div.firstElementChild);
+}
 
 const limpiarModal = () =>{
     let divUsuarios = document.querySelector('.lista-usuarios');

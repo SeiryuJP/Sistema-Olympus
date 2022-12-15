@@ -118,7 +118,7 @@ module.exports = {
     optimization: {},
     entry: {
         index: './src/index.js',
-        pruebas: './src/js/indexValidacion.js',
+        pruebas: './src/js/elegirPrueba.js',
         pruebasValoracion: './src/js/indexValidacion.js',
         pruebasEleccion: './src/js/indexValidacion.js',
         pruebasPuntual: './src/js/indexValidacion.js',
