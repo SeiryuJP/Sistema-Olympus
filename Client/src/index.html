@@ -1,15 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webpack</title>
-</head>
-<body>
-    <!--Comentario-->
-    <!--Comentario-->
-    <!--Comentario-->
-    <!-- <img src="assets/img/webpack-logo.png" alt="Webpack logo"> -->
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema Olympus</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo_olimpus.png">
+  </head>
+  <body>
+    <nav class="navbar cabecera">
+      <img src="../assets/img/logo_olimpus.png">
+      <h2 class="gelatine"><a class="nav-link" href="../index.html">Sistema Olympus</a></h2>
+      <div></div>
+    </nav>
+    <div class="vh-100 d-flex justify-content-center align-items-center formulario">
+        <div class="col-md-4 shadow-sm border rounded-3 bounce-in-right">
+          <div class="p-5 border rounded-3 contenedorRegistro">
+            <h2 class="text-center mb-4 animado">LOG IN</h2>
+          </div>
+          <form class="p-5" id="login" novalidate>
+            <div class="mb-4">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control area-texto email" name="email" required
+                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$">
+                <span class="erroremail text-danger"></span>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control area-texto password"name="password" required>
+                <span class="errorpassword text-danger"></span>
+              </div>
+            <div class="mb-4 d-grid gap-2 col-6 mx-auto boton">
+                <button class="btn btn-primary btn-lg" type="submit">Login</button>
+            </div>
+            <div class="mt-3">
+                <p class="mb-4 text-center">No tienes cuenta? <a href="./html/registro.html" class="text-primary">Registrar</a></p>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div id="modalRegistro" class="modal">
+      <div class="modalContent">
+        <span class="close">×</span>
+        <p id="parrafo"></p>
+      </div>
+    </div>
+    <footer class="bottom">
+      <span>© Copyright - 2022 | Khattari - Miriam</span>
+    </footer>
+  </body>
 </html>
