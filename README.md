@@ -51,7 +51,14 @@ El archivo se incluye en el .zip
 
 ## Credenciales
 
-Todos los usuarios cuentan con la password 1234 <br>
+Todos los usuarios cuentan con la password 1234 <br><br>
+Dioses : <br>
+    Zeus : zeus@dios.com <br>
+    Poseidon : poseidon@dios.com <br>
+    Hades : hades@dios.com <br> <br>
+Humanos : <br>
+    seiryubtc@gmail.com <br>
+    seiryujp7@gmail.com <br>
 
 ##
 
